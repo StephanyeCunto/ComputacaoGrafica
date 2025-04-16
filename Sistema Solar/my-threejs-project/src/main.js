@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
+import { planeta } from './planeta.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -12,12 +13,111 @@ camera.position.z = 240;
 
 const controls = new TrackballControls(camera, renderer.domElement);
 
+const planetas = [];
+
+criarSol();
+criarPlanetas();
+adicionaLuz();
+
+function adicionaLuz() {
+    const luzAmbiente = new THREE.AmbientLight(0x404040, 0.5); 
+     
+    const luzSolar = new THREE.PointLight(0xffffff, 2, 1000);
+    luzSolar.position.set(0, 0, 0);
+    luzSolar.name = 'luzDirecional';
+    
+    luzSolar.decay = 0.1;
+    
+    scene.add(luzAmbiente, luzSolar);
+    
+    luzSolar.tick = () => {
+        luzSolar.position.set(
+            scene.getObjectByName('sol').position.x, 
+            scene.getObjectByName('sol').position.y, 
+            scene.getObjectByName('sol').position.z
+        );
+    }
+    
+    return luzSolar;
+ 
+ }
+
+function criarPlanetas() {
+    const mercurio = new planeta(4, 'src/img/8k_mercury.jpg', { x: 30, y: 0, z: 0 });
+    mercurio.addToScene(scene);
+    planetas.push(mercurio);
+    const venus = new planeta(6, 'src/img/8k_venus_surface.jpg', { x: 50, y: 0, z: 0 });
+    venus.addToScene(scene);
+    planetas.push(venus);
+    const marte = new planeta(4, 'src/img/8k_mars.jpg', { x: 110, y: 0, z: 0 });
+    marte.addToScene(scene);
+    planetas.push(marte);
+    const jupiter = new planeta(10, 'src/img/8k_jupiter.jpg', { x: 140, y: 0, z: 0 });
+    jupiter.addToScene(scene);
+    planetas.push(jupiter);
+    const saturno = new planeta(9, 'src/img/8k_saturn.jpg', { x: 170, y: 0, z: 0 });
+    saturno.addToScene(scene);
+    planetas.push(saturno);
+    const netuno = new planeta(4, 'src/img/2k_neptune.jpg', { x: 190, y: 0, z: 0 });
+    netuno.addToScene(scene);
+    planetas.push(netuno);
+    const urano = new planeta(4, 'src/img/2k_uranus.jpg', { x: 210, y: 0, z: 0 });
+    urano.addToScene(scene);
+    planetas.push(urano);
+    const terra = new planeta(6, 'earth', { x: 80, y: 0, z: 0 });
+
+    terra.addToScene(scene);
+    planetas.push(terra);
+    
+    const nuvem = new planeta(6.02, 'https://threejs.org/examples/textures/planets/earth_clouds_1024.png', { x: 80, y: 0, z: 0 });
+    nuvem.setOpacity(0.8);
+    nuvem.addToScene(scene);
+    planetas.push(nuvem);
+}
+
+function criarSol() {
+    const raio = 20;
+    const segmentos = 64;
+    const solGeometry = new THREE.SphereGeometry(raio, segmentos, segmentos);
+    const texturaSol = new THREE.TextureLoader().load('/src/img/8k_sun.jpg');
+    const material = new THREE.MeshBasicMaterial({ map: texturaSol});
+    const sol = new THREE.Mesh(solGeometry, material);
+    sol.position.set(0, 0, 0);
+    sol.name = 'sol';
+
+    sol.tick = () => {
+        sol.rotation.y+= 0.001;
+    };
+    scene.add(sol);
+    return sol;
+}
+
+
+function animate() {
+    requestAnimationFrame(animate);
+    scene.getObjectByName('luzDirecional').tick();
+    scene.getObjectByName('sol').tick();
+
+    planetas.forEach(planet => {
+        planet.rotate();
+    });
+
+   /* planetas.forEach(planet => {
+        planet.tick();
+    });
+*/
+    controls.update();
+    renderer.render(scene, camera);
+}
+
+animate();
+/*
 criarSistemaSolar();
 adicionaLuz();
 
 function adicionaLuz() {
     const luzAmbiente = new THREE.AmbientLight(0x404040, 1.5); 
-    const luzDirecional = new THREE.DirectionalLight(0xffffff, 3);
+    const luzDirecional = new THREE.PointLight(0xffffff, 30,1000,100);
     luzDirecional.position.set(0, 0, 0);
     luzDirecional.name = 'luzDirecional';
     scene.add(luzAmbiente,luzDirecional);
@@ -299,3 +399,4 @@ function animate() {
 }
 
 animate();
+*/
