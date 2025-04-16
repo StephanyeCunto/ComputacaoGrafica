@@ -1,19 +1,19 @@
-# Sistema Solar 3D
+# Sistema Solar 3D - Trabalho de Computação Gráfica
 
-Uma visualização interativa do sistema solar criada com Three.js, permitindo explorar os planetas em um ambiente 3D.
+Uma visualização interativa do sistema solar desenvolvida com Three.js para a disciplina de Computação Gráfica.
 
 ## 📋 Sobre o Projeto
 
-Este projeto renderiza um modelo 3D do sistema solar usando Three.js, com texturas de alta qualidade para cada planeta. O usuário pode interagir com a visualização usando controles de câmera para explorar diferentes ângulos e posições.
+Este projeto é o primeiro trabalho da disciplina de Computação Gráfica e consiste em uma simulação 3D do sistema solar usando a biblioteca Three.js. A aplicação renderiza o sol e os planetas do sistema solar com texturas realistas, permitindo que o usuário navegue pelo espaço com controles interativos.
 
 ### Características
 
 - Renderização 3D do sol e dos planetas do sistema solar
-- Texturas realistas de alta qualidade
-- Movimento de rotação dos planetas
-- Iluminação dinâmica simulando o sol
-- Controles interativos da câmera
-- Visualização especial da Terra com camadas de nuvens
+- Texturas de alta qualidade para cada planeta
+- Rotação dos planetas em seus próprios eixos
+- Iluminação dinâmica centralizada no sol
+- Controles de câmera TrackballControls para navegação interativa
+- Tratamento especial para a Terra com camada de nuvens
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -25,12 +25,12 @@ Este projeto renderiza um modelo 3D do sistema solar usando Three.js, com textur
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/sistema-solar-3d.git
+   git clone https://github.com/StephanyeCunto/ComputacaoGrafica
    ```
 
 2. Navegue até a pasta do projeto:
    ```bash
-   cd sistema-solar-3d
+   cd Sistema_Solar-3D
    ```
 
 3. Instale as dependências:
@@ -47,7 +47,37 @@ Este projeto renderiza um modelo 3D do sistema solar usando Three.js, com textur
 
 ## 📁 Estrutura do Projeto
 
-- `main.js` - Ponto de entrada principal que configura a cena 3D
-- `planeta.js` - Classe para criação e gestão dos planetas
-- `src/img/` - Texturas dos planetas
+- `index.js` - Arquivo principal que configura a cena, câmera, renderizador e controles
+- `planeta.js` - Classe para criação e gerenciamento dos planetas
+- `src/img/` - Diretório com as texturas dos planetas
 
+## 🧩 Classe Planeta
+
+A classe `planeta` é responsável por criar e gerenciar os planetas do sistema solar:
+
+```javascript
+import * as THREE from 'three';
+export class planeta {
+    constructor(radius, texture, position) {
+        this.radius = radius;
+        this.position = position;
+        this.distanceSol = position.x;
+        this.geometry = new THREE.SphereGeometry(this.radius, 64, 64);
+        this.texture = texture;
+        if (texture == "earth") {
+            this.material = this.materialTerra();
+        } else {
+            this.material = new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load(this.texture) });
+        }
+        this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.mesh.position.set(this.position.x, this.position.y, this.position.z);
+    }
+    // Métodos da classe...
+}
+```
+
+## 📚 Referências
+
+- [Documentação do Three.js](https://threejs.org/docs/)
+- [Solar System Scope](https://www.solarsystemscope.com/) - Referência visual
+- [NASA Solar System Exploration](https://solarsystem.nasa.gov/) - Texturas e informações sobre os planetas
