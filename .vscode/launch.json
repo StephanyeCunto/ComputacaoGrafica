@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Open main.html",
+      "file": "/Users/stephanye/Documents/CG/main.html"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/stephanye/Documents/CG",
+      "program": "/Users/stephanye/Documents/CG/build/Debug/outDebug"
+    }
+  ]
+}
