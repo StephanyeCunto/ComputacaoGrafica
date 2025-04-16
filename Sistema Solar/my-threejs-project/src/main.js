@@ -18,7 +18,7 @@ adicionaLuz();
 
 function adicionaLuz() {
     const luzDirecional = new THREE.DirectionalLight(0xffffff, 10);
-    luzDirecional.position.set(-5, 0, 0); 
+    luzDirecional.name = 'luzDirecional';
     scene.add(luzDirecional);
 
     const luzAmbiente = new THREE.AmbientLight(0x404040, 1.5); 
@@ -28,6 +28,14 @@ function adicionaLuz() {
 function criarSistemaSolar() {
     scene.add(criarSol());
     scene.add(criarTerra());
+
+    criarSistemaSolar.tick = () => {
+        scene.getObjectByName('luzDirecional').position.set(-scene.terraGrupo.position.x, 0, 0);
+        scene.terraGrupo.tick();
+        scene.getObjectByName('sol').tick();
+        scene.terraGrupo.position.x = Math.cos(Date.now() * 0.0001) * 80;
+        scene.terraGrupo.position.z = Math.sin(Date.now() * 0.0001) * 80;  
+    }
 }
 
 function criarSol() {
@@ -96,8 +104,7 @@ function criarTerra() {
 function animate() {
     requestAnimationFrame(animate);
     
-    scene.terraGrupo.tick();
-    scene.getObjectByName('sol').tick();
+    criarSistemaSolar.tick();
 
     controls.update();
     renderer.render(scene, camera);
