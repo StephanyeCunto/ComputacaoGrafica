@@ -13,16 +13,16 @@ camera.position.z = 60;
 const controls = new TrackballControls(camera, renderer.domElement);
 
 criarSistemaSolar();
-
 adicionaLuz();
 
 function adicionaLuz() {
+    const luzAmbiente = new THREE.AmbientLight(0x404040, 1.5); 
+    scene.add(luzAmbiente);
     const luzDirecional = new THREE.DirectionalLight(0xffffff, 10);
+    luzDirecional.position.set(0, 0, 0);
     luzDirecional.name = 'luzDirecional';
     scene.add(luzDirecional);
 
-    const luzAmbiente = new THREE.AmbientLight(0x404040, 1.5); 
-    scene.add(luzAmbiente);
 }
 
 function criarSistemaSolar() {
@@ -30,9 +30,10 @@ function criarSistemaSolar() {
     scene.add(criarTerra());
 
     criarSistemaSolar.tick = () => {
-        scene.getObjectByName('luzDirecional').position.set(-scene.terraGrupo.position.x, 0, 0);
         scene.terraGrupo.tick();
         scene.getObjectByName('sol').tick();
+        scene.getObjectByName('luzDirecional').position.x = -scene.terraGrupo.position.x;
+        scene.getObjectByName('luzDirecional').position.z = -scene.terraGrupo.position.z;
         scene.terraGrupo.position.x = Math.cos(Date.now() * 0.0001) * 80;
         scene.terraGrupo.position.z = Math.sin(Date.now() * 0.0001) * 80;  
     }
@@ -43,13 +44,12 @@ function criarSol() {
     const segmentos = 64;
     const solGeometry = new THREE.SphereGeometry(raio, segmentos, segmentos);
     const texturaSol = new THREE.TextureLoader().load('/src/img/8k_sun.jpg');
-    const material = new THREE.MeshBasicMaterial({map: texturaSol});
+    const material = new THREE.MeshBasicMaterial({ map: texturaSol, emissive: 0xffffaa });
     const sol = new THREE.Mesh(solGeometry, material);
     sol.position.set(0, 0, 0);
     sol.name = 'sol';
-
     sol.tick = () => {
-        sol.rotation.y+= 0.0008;
+        sol.rotation.y+= 0.001;
     };
     return sol;
 }
