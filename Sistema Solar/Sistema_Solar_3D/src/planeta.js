@@ -23,6 +23,10 @@ export class planeta{
             for(let i=0; i<this.luas; i++){
                 const lua = new Lua(i);
                 this.mesh.add(lua.mesh);
+                this.tick = () => {
+                    lua.tick();
+                    this.planetTick();
+                }
             }
         }
         this.addToScene(scene);
@@ -46,6 +50,10 @@ export class planeta{
     }
 
     tick(){
+        this.planetTick();
+    }
+
+    planetTick(){
         this.rotate();
         this.mesh.position.x = this.position.x + Math.sin(Date.now() * 0.001) * this.distanceSol*2;
         this.mesh.position.z = this.position.z + Math.cos(Date.now() * 0.001) * this.distanceSol*2;
