@@ -1,8 +1,7 @@
 import * as THREE from 'three';
-import { Lua } from './lua.js';
 
 export class planeta{
-    constructor(radius, texture, position,scene,luas){
+    constructor(radius, texture, position,scene){
         this.radius = radius;
         this.position = position;
         this.distanceSol = position.x;
@@ -18,17 +17,6 @@ export class planeta{
         }
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.position.set(this.position.x, this.position.y, this.position.z);
-        this.luas = luas;
-        if(luas){
-            for(let i=0; i<this.luas; i++){
-                const lua = new Lua(i);
-                this.mesh.add(lua.mesh);
-                this.tick = () => {
-                    lua.tick();
-                    this.planetTick();
-                }
-            }
-        }
         this.addToScene(scene);
     }
 
@@ -50,13 +38,9 @@ export class planeta{
     }
 
     tick(){
-        this.planetTick();
-    }
-
-    planetTick(){
         this.rotate();
         this.mesh.position.x = this.position.x + Math.sin(Date.now() * 0.001) * this.distanceSol*2;
-        this.mesh.position.z = this.position.z + Math.cos(Date.now() * 0.001) * this.distanceSol*2;
+        this.mesh.position.z = this.position.z + Math.cos(Date.now() * 0.001) * this.distanceSol*2;    
     }
 
     materialTerra(){

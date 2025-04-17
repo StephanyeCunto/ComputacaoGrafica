@@ -33,21 +33,21 @@ function adicionaLuz() {
  }
 
 function criarPlanetas() {
-    const mercurio = new planeta(4, 'src/img/8k_mercury.jpg', { x: 30, y: 0, z: 0 }, scene,0);
+    const mercurio = new planeta(4, 'src/img/8k_mercury.jpg', { x: 30, y: 0, z: 0 }, scene);
     planetas.push(mercurio);
-    const venus = new planeta(6, 'src/img/8k_venus_surface.jpg', { x: 50, y: 0, z: 0 }, scene,0);
+    const venus = new planeta(6, 'src/img/8k_venus_surface.jpg', { x: 50, y: 0, z: 0 }, scene);
     planetas.push(venus);
-    const marte = new planeta(4, 'src/img/8k_mars.jpg', { x: 120, y: 0, z: 0 }, scene,2);
+    const marte = new planeta(4, 'src/img/8k_mars.jpg', { x: 120, y: 0, z: 0 }, scene);
     planetas.push(marte);
-    const jupiter = new planeta(10, 'src/img/8k_jupiter.jpg', { x: 180, y: 0, z: 0 }, scene,4);
+    const jupiter = new planeta(10, 'src/img/8k_jupiter.jpg', { x: 180, y: 0, z: 0 }, scene);
     planetas.push(jupiter);
-    const saturno = new planeta(9, 'src/img/8k_saturn.jpg', { x: 250, y: 0, z: 0 }, scene,4);
+    const saturno = new planeta(9, 'src/img/8k_saturn.jpg', { x: 250, y: 0, z: 0 }, scene);
     planetas.push(saturno);
-    const netuno = new planeta(4, 'src/img/2k_neptune.jpg', { x: 310, y: 0, z: 0 }, scene,2);
+    const netuno = new planeta(4, 'src/img/2k_neptune.jpg', { x: 310, y: 0, z: 0 }, scene);
     planetas.push(netuno);
-    const urano = new planeta(4, 'src/img/2k_uranus.jpg', { x: 350, y: 0, z: 0 }, scene,2);
+    const urano = new planeta(4, 'src/img/2k_uranus.jpg', { x: 350, y: 0, z: 0 }, scene);
     planetas.push(urano);
-    const terra = new planeta(6, 'earth', { x: 80, y: 0, z: 0 }, scene,1);
+    const terra = new planeta(6, 'earth', { x: 80, y: 0, z: 0 }, scene);
     planetas.push(terra);
     
     const nuvem = new planeta(6.02, 'https://threejs.org/examples/textures/planets/earth_clouds_1024.png', { x: 80, y: 0, z: 0 }, scene);
