@@ -10,7 +10,7 @@ export class planeta{
         if(texture == "earth"){
             this.material = this.materialTerra(); 
         }else{
-            this.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(this.texture) });
+            this.material = new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load(this.texture) });
         }
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.position.set(this.position.x, this.position.y, this.position.z);
