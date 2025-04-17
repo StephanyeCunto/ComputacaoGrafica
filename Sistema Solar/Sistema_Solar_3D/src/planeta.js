@@ -8,15 +8,19 @@ export class planeta{
         this.geometry = new THREE.SphereGeometry(this.radius, 64, 64);
         this.texture = texture;
         this.speed = 0.01;
+        this.speedOrbita =  0.001 / (this.distanceSol / 30);
+
         if(texture == "earth"){
             this.material = this.materialTerra(); 
         }else{
             this.material = new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load(this.texture), 
                 roughness: 0.9,
-                metalness: 0.1 });
+                metalness: 0.1 
+            });
         }
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.position.set(this.position.x, this.position.y, this.position.z);
+
         this.addToScene(scene);
     }
 
@@ -39,8 +43,9 @@ export class planeta{
 
     tick(){
         this.rotate();
-        this.mesh.position.x = this.position.x + Math.sin(Date.now() * 0.001) * this.distanceSol*2;
-        this.mesh.position.z = this.position.z + Math.cos(Date.now() * 0.001) * this.distanceSol*2;    
+        this.mesh.position.x =  Math.sin(Date.now() * this.speedOrbita)* this.distanceSol;
+        this.mesh.position.z =  Math.cos(Date.now() * this.speedOrbita)* this.distanceSol;
+        this.mesh.position.y = this.position.y;   
     }
 
     materialTerra(){
