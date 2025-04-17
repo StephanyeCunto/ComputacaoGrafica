@@ -2,76 +2,57 @@ import * as THREE from 'three';
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 import { planeta } from './planeta.js';
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
+
 document.body.appendChild(renderer.domElement);
 
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
 camera.position.z = 240;
-
 const controls = new TrackballControls(camera, renderer.domElement);
 
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000510);
 const planetas = [];
 
-criarSol();
-criarPlanetas();
 adicionaLuz();
+criarSistemaSolar();
+
+function criarSistemaSolar(){
+    criarSol();
+    criarPlanetas();
+}
 
 function adicionaLuz() {
     const luzAmbiente = new THREE.AmbientLight(0x404040, 0.5); 
-     
-    const luzSolar = new THREE.PointLight(0xffffff, 2, 1000);
+    const luzSolar = new THREE.PointLight(0xffffff, 2, 2000, 0.1);
     luzSolar.position.set(0, 0, 0);
-    luzSolar.name = 'luzDirecional';
-    
-    luzSolar.decay = 0.1;
-    
+    luzSolar.name = 'luzSolar';
     scene.add(luzAmbiente, luzSolar);
-    
-    luzSolar.tick = () => {
-        luzSolar.position.set(
-            scene.getObjectByName('sol').position.x, 
-            scene.getObjectByName('sol').position.y, 
-            scene.getObjectByName('sol').position.z
-        );
-    }
-    
-    return luzSolar;
- 
  }
 
 function criarPlanetas() {
-    const mercurio = new planeta(4, 'src/img/8k_mercury.jpg', { x: 30, y: 0, z: 0 });
-    mercurio.addToScene(scene);
+    const mercurio = new planeta(4, 'src/img/8k_mercury.jpg', { x: 30, y: 0, z: 0 }, scene,0);
     planetas.push(mercurio);
-    const venus = new planeta(6, 'src/img/8k_venus_surface.jpg', { x: 50, y: 0, z: 0 });
-    venus.addToScene(scene);
+    const venus = new planeta(6, 'src/img/8k_venus_surface.jpg', { x: 50, y: 0, z: 0 }, scene,0);
     planetas.push(venus);
-    const marte = new planeta(4, 'src/img/8k_mars.jpg', { x: 110, y: 0, z: 0 });
-    marte.addToScene(scene);
+    const marte = new planeta(4, 'src/img/8k_mars.jpg', { x: 120, y: 0, z: 0 }, scene,2);
     planetas.push(marte);
-    const jupiter = new planeta(10, 'src/img/8k_jupiter.jpg', { x: 140, y: 0, z: 0 });
-    jupiter.addToScene(scene);
+    const jupiter = new planeta(10, 'src/img/8k_jupiter.jpg', { x: 180, y: 0, z: 0 }, scene,4);
     planetas.push(jupiter);
-    const saturno = new planeta(9, 'src/img/8k_saturn.jpg', { x: 170, y: 0, z: 0 });
-    saturno.addToScene(scene);
+    const saturno = new planeta(9, 'src/img/8k_saturn.jpg', { x: 250, y: 0, z: 0 }, scene,4);
     planetas.push(saturno);
-    const netuno = new planeta(4, 'src/img/2k_neptune.jpg', { x: 190, y: 0, z: 0 });
-    netuno.addToScene(scene);
+    const netuno = new planeta(4, 'src/img/2k_neptune.jpg', { x: 310, y: 0, z: 0 }, scene,2);
     planetas.push(netuno);
-    const urano = new planeta(4, 'src/img/2k_uranus.jpg', { x: 210, y: 0, z: 0 });
-    urano.addToScene(scene);
+    const urano = new planeta(4, 'src/img/2k_uranus.jpg', { x: 350, y: 0, z: 0 }, scene,2);
     planetas.push(urano);
-    const terra = new planeta(6, 'earth', { x: 80, y: 0, z: 0 });
-
-    terra.addToScene(scene);
+    const terra = new planeta(6, 'earth', { x: 80, y: 0, z: 0 }, scene,1);
     planetas.push(terra);
     
-    const nuvem = new planeta(6.02, 'https://threejs.org/examples/textures/planets/earth_clouds_1024.png', { x: 80, y: 0, z: 0 });
+    const nuvem = new planeta(6.02, 'https://threejs.org/examples/textures/planets/earth_clouds_1024.png', { x: 80, y: 0, z: 0 }, scene);
     nuvem.setOpacity(0.8);
-    nuvem.addToScene(scene);
+    nuvem.setSpeed(0.015);
     planetas.push(nuvem);
 }
 
@@ -88,29 +69,25 @@ function criarSol() {
     sol.tick = () => {
         sol.rotation.y+= 0.001;
     };
+
     scene.add(sol);
-    return sol;
 }
 
 
 function animate() {
     requestAnimationFrame(animate);
-    scene.getObjectByName('luzDirecional').tick();
     scene.getObjectByName('sol').tick();
 
-    planetas.forEach(planet => {
-        planet.rotate();
+   planetas.forEach(planet => {
+  //     planet.tick();
     });
 
-   /* planetas.forEach(planet => {
-        planet.tick();
-    });
-*/
     controls.update();
     renderer.render(scene, camera);
 }
 
 animate();
+
 /*
 criarSistemaSolar();
 adicionaLuz();

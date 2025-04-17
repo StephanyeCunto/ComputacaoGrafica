@@ -1,19 +1,31 @@
 import * as THREE from 'three';
+import { Lua } from './lua.js';
 
 export class planeta{
-    constructor(radius, texture, position){
+    constructor(radius, texture, position,scene,luas){
         this.radius = radius;
         this.position = position;
         this.distanceSol = position.x;
         this.geometry = new THREE.SphereGeometry(this.radius, 64, 64);
         this.texture = texture;
+        this.speed = 0.01;
         if(texture == "earth"){
             this.material = this.materialTerra(); 
         }else{
-            this.material = new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load(this.texture) });
+            this.material = new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load(this.texture), 
+                roughness: 0.9,
+                metalness: 0.1 });
         }
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.position.set(this.position.x, this.position.y, this.position.z);
+        this.luas = luas;
+        if(luas){
+            for(let i=0; i<this.luas; i++){
+                const lua = new Lua(i);
+                this.mesh.add(lua.mesh);
+            }
+        }
+        this.addToScene(scene);
     }
 
     addToScene(scene){
@@ -25,12 +37,12 @@ export class planeta{
         this.material.opacity = opacity;
     }
 
-    setRotationSpeed(speed){
-        this.mesh.rotation.y += speed;
+    setSpeed(speed){
+        this.speed = speed;
     }
 
     rotate(){
-        this.mesh.rotation.y += 0.01;
+        this.mesh.rotation.y += this.speed;
     }
 
     tick(){
@@ -42,15 +54,12 @@ export class planeta{
     materialTerra(){
         const texturaTerra = new THREE.TextureLoader().load('/src/img/8k_earth_daymap.jpg');
         const normalMap = new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_normal_2048.jpg');
-        const specularMap = new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_specular_2048.jpg');
-
-        const material = new THREE.MeshPhongMaterial({
+        const material = new THREE.MeshStandardMaterial({
             map: texturaTerra,
             normalMap: normalMap,
             normalScale: new THREE.Vector2(1, 1),
-            specularMap: specularMap,
-            specular: new THREE.Color(0x333333), 
-            shininess: 10
+            roughness: 0.9,
+            metalness: 0.1
         });
         return material;
     }
