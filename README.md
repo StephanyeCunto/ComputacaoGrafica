@@ -98,6 +98,8 @@ O diagrama a seguir ilustra a estrutura de classes da aplicação e seus relacio
 ```mermaid
 classDiagram
     class THREE {
+        <<Library>>
+
         +WebGLRenderer
         +PerspectiveCamera
         +Scene
@@ -114,12 +116,15 @@ classDiagram
     }
 
     class TrackballControls {
+        <<Library>>
+
         -camera
         -domElement
         +update()
     }
 
-    class planeta {
+    class Planeta {
+        <<Entity>>
         -radius: Number
         -position: Object
         -distanceSol: Number
@@ -139,6 +144,7 @@ classDiagram
     }
 
     class Lua {
+        <<Entity>>
         -radius: Number
         -geometry: SphereGeometry
         -texture: String
@@ -149,6 +155,8 @@ classDiagram
     }
 
     class Main {
+        <<Controller>>
+
         -renderer: WebGLRenderer
         -camera: PerspectiveCamera
         -controls: TrackballControls
@@ -162,10 +170,12 @@ classDiagram
         +animate()
     }
 
-    planeta --> Lua : contém
-    Main --> planeta : cria e gerencia
+    Planeta --> Lua : contém
+    Main --> Planeta : cria e gerencia
     Main --> THREE : utiliza
     Main --> TrackballControls : utiliza
+    Lua --> THREE : utiliza
+    Planeta --> THREE : utiliza
 ```
 
 
