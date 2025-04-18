@@ -45,18 +45,18 @@ function criarPlanetas() {
     planetas.push(mercurio);
     const venus = new planeta(6, 'src/img/8k_venus_surface.jpg', { x: 50, y: 0, z: 0 }, scene);
     planetas.push(venus);
-    const marte = new planeta(4, 'src/img/8k_mars.jpg', { x: 70, y: 0, z: 0 }, scene);
-    planetas.push(marte);
-    const jupiter = new planeta(10, 'src/img/8k_jupiter.jpg', { x: 120, y: 0, z: 0 }, scene);
-    planetas.push(jupiter);
-    const saturno = new planeta(9, 'src/img/8k_saturn.jpg', { x: 150, y: 0, z: 0 }, scene);
-    planetas.push(saturno);
-    const netuno = new planeta(4, 'src/img/2k_neptune.jpg', { x: 180, y: 0, z: 0 }, scene);
-    planetas.push(netuno);
-    const urano = new planeta(4, 'src/img/2k_uranus.jpg', { x: 200, y: 0, z: 0 }, scene);
-    planetas.push(urano);
-    const terra = new planeta(6, 'earth', { x: 90, y: 0, z: 0 }, scene, true, true, true);
+    const terra = new planeta(6, 'earth', { x: 80, y: 0, z: 0 }, scene, true, true, true);
     planetas.push(terra);
+    const marte = new planeta(4, 'src/img/8k_mars.jpg', { x: 110, y: 0, z: 0 }, scene);
+    planetas.push(marte);
+    const jupiter = new planeta(10, 'src/img/8k_jupiter.jpg', { x: 130, y: 0, z: 0 }, scene);
+    planetas.push(jupiter);
+    const saturno = new planeta(9, 'src/img/8k_saturn.jpg', { x: 160, y: 0, z: 0 }, scene);
+    planetas.push(saturno);
+    const netuno = new planeta(4, 'src/img/2k_neptune.jpg', { x: 190, y: 0, z: 0 }, scene);
+    planetas.push(netuno);
+    const urano = new planeta(4, 'src/img/2k_uranus.jpg', { x: 210, y: 0, z: 0 }, scene);
+    planetas.push(urano);
 }
 
 function criarSol() {
