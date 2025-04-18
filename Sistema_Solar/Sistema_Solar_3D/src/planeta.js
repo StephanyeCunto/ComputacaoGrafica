@@ -13,7 +13,6 @@ export class Planeta{
         this.texture = texture;
         this.speed = 0.01;
         this.speedOrbita =  0.001 / (this.distanceSol / 30);
-
         const grupo = new THREE.Group();
         this.grupo = grupo;
 
