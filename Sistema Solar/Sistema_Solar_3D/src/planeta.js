@@ -16,9 +16,11 @@ export class Planeta{
 
         const grupo = new THREE.Group();
         this.grupo = grupo;
-        if(atmosphere) this.criarAtmosfera();
-        if(lua) this.criarLua();
-        if(anel) this.criarAnel();
+
+        atmosphere ? grupo.add((this.atmosfera = new Atmosfera(this.radius)).mesh): null;
+        lua ? grupo.add((this.lua = new Lua()).mesh): null;
+        anel ? grupo.add((this.anel = new Anel(this.radius)).mesh): null;
+
         this.material = earth ? this.materialTerra() : this.material = this.materialGenerico()
 
         this.mesh = new THREE.Mesh(this.geometry, this.material);
@@ -43,24 +45,6 @@ export class Planeta{
         if(this.atmosfera) this.atmosfera.tick();
         if(this.lua) this.lua.tick();
         if(this.anel) this.anel.tick();
-    }
-
-    criarLua(){
-        const lua = new Lua();
-        this.grupo.add(lua.mesh);
-        this.lua = lua;
-    }
-
-    criarAnel() {
-        const anel = new Anel(this.radius);
-        this.grupo.add(anel.mesh);
-        this.anel = anel;
-      }
-
-    criarAtmosfera(){
-        const atmosfera = new Atmosfera(this.radius);
-        this.grupo.add(atmosfera.mesh);
-        this.atmosfera = atmosfera;
     }
 
     materialGenerico(){
