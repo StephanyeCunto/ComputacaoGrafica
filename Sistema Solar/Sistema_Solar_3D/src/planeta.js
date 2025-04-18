@@ -5,7 +5,7 @@ import { Anel } from './anel.js';
 import { Atmosfera } from './atmosfera.js';
 
 export class Planeta{
-    constructor( radius, texture, position,scene, atmosphere, lua, earth, anel){
+    constructor( radius, texture, position,scene, atmosfera, lua, earth, anel){
         this.radius = radius;
         this.position = position;
         this.distanceSol = position.x;
@@ -17,9 +17,9 @@ export class Planeta{
         const grupo = new THREE.Group();
         this.grupo = grupo;
 
-        atmosphere ? grupo.add((this.atmosfera = new Atmosfera(this.radius)).mesh): null;
-        lua ? grupo.add((this.lua = new Lua()).mesh): null;
-        anel ? grupo.add((this.anel = new Anel(this.radius)).mesh): null;
+        if(atmosfera) grupo.add((this.atmosfera = new Atmosfera(this.radius)).mesh);
+        if(lua) grupo.add((this.lua = new Lua()).mesh);
+        if(anel)  grupo.add((this.anel = new Anel(this.radius)).mesh);
 
         this.material = earth ? this.materialTerra() : this.material = this.materialGenerico()
 
