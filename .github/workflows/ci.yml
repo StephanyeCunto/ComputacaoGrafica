@@ -1,0 +1,44 @@
+name: CI/CD Pipeline
+
+# Evento de disparo (sempre que houver um push para a branch main)
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Job para instalar dependências e rodar os testes
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+        
+      - name: Configurar Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Altere para a versão que você está utilizando
+
+      - name: Instalar dependências
+        run: cd Sistema_Solar
+            npm install
+
+      - name: Rodar os testes (caso tenha)
+        run: cd Sistema_Solar
+              npm test  # Se você tiver testes configurados, altere conforme necessário
+
+      - name: Build do projeto
+        run: cd Sistema_Solar
+            npm run build  # Altere para o comando que gera o build, caso tenha
+
+      - name: Deploy para GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # Define o diretório onde o build é gerado, geralmente é a pasta "dist" ou "build"
+          folder: dist  # Ajuste conforme necessário para o seu projeto
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Usado para autenticação no GitHub
