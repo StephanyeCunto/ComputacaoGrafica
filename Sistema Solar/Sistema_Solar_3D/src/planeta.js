@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { Lua } from './lua.js';
 
 export class Planeta{
-    constructor(radius, texture, position,scene, atmosphere, lua, earth){
+    constructor( radius, texture, position,scene, atmosphere, lua, earth){
         this.radius = radius;
         this.position = position;
         this.distanceSol = position.x;
@@ -43,7 +43,6 @@ export class Planeta{
 
     criarLua(){
         const lua = new Lua();
-        lua.mesh.position.set(this.position.x + 15, this.position.y, this.position.z);
         this.grupo.add(lua.mesh);
         this.lua = lua;
     }

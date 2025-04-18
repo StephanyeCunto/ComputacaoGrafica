@@ -72,7 +72,7 @@ function animate() {
     scene.getObjectByName('sol').tick();
 
     planetasScene.forEach(planet => {
-      planet.tick();
+        planet.tick();
     });
 
     controls.update();
