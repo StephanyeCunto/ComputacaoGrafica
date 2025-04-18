@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 import { Lua } from './lua.js';
 
-export class planeta{
+export class Planeta{
     constructor(radius, texture, position,scene, atmosphere, lua, earth){
         this.radius = radius;
         this.position = position;
@@ -14,23 +14,9 @@ export class planeta{
 
         const grupo = new THREE.Group();
         this.grupo = grupo;
-        if(atmosphere){
-            const atmosfera = this.criarAtmosfera();
-            this.atmosfera = atmosfera;
-            grupo.add(atmosfera);
-        }
-        if(lua){
-            this.lua = new Lua();
-            grupo.add(this.lua.mesh);
-        }
-        if(earth){
-            this.material = this.materialTerra(); 
-        }else{
-            this.material = new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load(this.texture), 
-                roughness: 0.9,
-                metalness: 0.1 
-            });
-        }
+        if(atmosphere) this.criarAtmosfera();
+        if(lua) this.criarLua();
+        this.material = earth ? this.materialTerra() : this.material = this.materialGenerico()
 
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.grupo.position.set(this.position.x, this.position.y, this.position.z);
@@ -38,15 +24,28 @@ export class planeta{
         scene.add(grupo);
     }
 
-    tick(){
+    rotate(){
         this.mesh.rotation.y += this.speed;
-        this.grupo.position.x =  Math.sin(Date.now() * this.speedOrbita)* this.distanceSol;
-        this.grupo.position.z =  Math.cos(Date.now() * this.speedOrbita)* this.distanceSol;
-        this.grupo.position.y = this.position.y;  
-        if(this.atmosfera){
-            this.lua.tick();
-            this.atmosfera.tick();
-        }
+    }
+
+    translate(){
+        this.grupo.position.x = Math.sin(Date.now() * this.speedOrbita) * this.distanceSol;
+        this.grupo.position.z = Math.cos(Date.now() * this.speedOrbita) * this.distanceSol;
+        this.grupo.position.y = this.position.y;
+    }
+
+    tick(){
+        this.rotate();
+        this.translate();
+        if(this.atmosfera) this.atmosfera.tick();
+        if(this.lua) this.lua.tick();
+    }
+
+    criarLua(){
+        const lua = new Lua();
+        lua.mesh.position.set(this.position.x + 15, this.position.y, this.position.z);
+        this.grupo.add(lua.mesh);
+        this.lua = lua;
     }
 
     criarAtmosfera(){
@@ -62,9 +61,20 @@ export class planeta{
         const atmosfera = new THREE.Mesh(geometryAtmosfera, materialAtmosfera);
 
         atmosfera.tick = () => {
-            atmosfera.rotation.y += 0.005;
+            atmosfera.rotation.y += 0.02;
         }
-        return atmosfera;
+
+        this.atmosfera = atmosfera;
+        this.grupo.add(atmosfera);
+    }
+
+    materialGenerico(){
+        const material = new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load(this.texture), 
+            roughness: 0.9,
+            metalness: 0.1 
+        });
+
+        return material;
     }
 
     materialTerra(){

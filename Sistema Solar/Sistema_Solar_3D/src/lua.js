@@ -11,6 +11,7 @@ export class Lua{
             metalness: 0.1,
           });        
         this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.mesh.position.set(15, 0, 0);
     }
 
     tick(){
