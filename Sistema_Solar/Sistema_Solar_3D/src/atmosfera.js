@@ -11,7 +11,6 @@ export class Atmosfera{
         });
         this.material.opacity = 0.8;
         this.material.transparent = true;
-        
         this.mesh = new THREE.Mesh(this.geometry, this.material);
     }
 
