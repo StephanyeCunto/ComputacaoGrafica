@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 
+import { Lua } from './lua.js';
+
 export class planeta{
     constructor(radius, texture, position,scene){
         this.radius = radius;
@@ -10,18 +12,23 @@ export class planeta{
         this.speed = 0.01;
         this.speedOrbita =  0.001 / (this.distanceSol / 30);
 
+        const grupo = new THREE.Group();
+        this.grupo = grupo;
         if(texture == "earth"){
             this.material = this.materialTerra(); 
+            this.lua = new Lua();
+            grupo.add(this.lua.mesh);
         }else{
             this.material = new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load(this.texture), 
                 roughness: 0.9,
                 metalness: 0.1 
             });
         }
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
-        this.mesh.position.set(this.position.x, this.position.y, this.position.z);
 
-        this.addToScene(scene);
+        this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.grupo.position.set(this.position.x, this.position.y, this.position.z);
+        grupo.add(this.mesh);
+        scene.add(grupo);
     }
 
     addToScene(scene){
@@ -43,9 +50,12 @@ export class planeta{
 
     tick(){
         this.rotate();
-        this.mesh.position.x =  Math.sin(Date.now() * this.speedOrbita)* this.distanceSol;
-        this.mesh.position.z =  Math.cos(Date.now() * this.speedOrbita)* this.distanceSol;
-        this.mesh.position.y = this.position.y;   
+        this.grupo.position.x =  Math.sin(Date.now() * this.speedOrbita)* this.distanceSol;
+        this.grupo.position.z =  Math.cos(Date.now() * this.speedOrbita)* this.distanceSol;
+        this.grupo.position.y = this.position.y;  
+        if(this.lua){
+           this.lua.tick(this.position);
+        } 
     }
 
     materialTerra(){

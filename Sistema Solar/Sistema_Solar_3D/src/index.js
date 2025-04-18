@@ -17,7 +17,16 @@ scene.background = new THREE.Color(0x000510);
 const planetas = [];
 
 adicionaLuz();
+//criarEstrelas();
 criarSistemaSolar();
+animate();
+
+function criarEstrelas(){
+    const geometryStar = new THREE.SphereGeometry(0.1, 8, 8);
+    const materialStar = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const star = new THREE.Mesh(geometryStar, materialStar);
+    scene.add(star);
+}
 
 function criarSistemaSolar(){
     criarSol();
@@ -84,5 +93,3 @@ function animate() {
     controls.update();
     renderer.render(scene, camera);
 }
-
-animate();
