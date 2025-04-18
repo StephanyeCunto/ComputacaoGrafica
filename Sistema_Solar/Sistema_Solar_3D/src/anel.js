@@ -12,7 +12,7 @@ export class Anel{
             depthWrite: false,     
             alphaTest: 0.1,      
             blending: THREE.AdditiveBlending,  
-            emissive: 0x222222,    
+            emissive: 0x222222   
         });
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.rotation.x = (-Math.PI / 2) - 0.2;
