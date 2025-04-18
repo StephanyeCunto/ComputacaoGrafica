@@ -97,85 +97,106 @@ O diagrama a seguir ilustra a estrutura de classes da aplicação e seus relacio
 
 ```mermaid
 classDiagram
-    class THREE {
-        <<Library>>
-
-        +WebGLRenderer
-        +PerspectiveCamera
-        +Scene
-        +SphereGeometry
-        +MeshBasicMaterial
-        +MeshStandardMaterial
-        +Mesh
-        +AmbientLight
-        +PointLight
-        +TextureLoader
-        +Group
-        +Vector2
-        +Color
-    }
-
-    class TrackballControls {
-        <<Library>>
-
-        -camera
-        -domElement
-        +update()
-    }
-
-    class Planeta {
-        <<Entity>>
-        -radius: Number
-        -position: Object
-        -distanceSol: Number
-        -geometry: SphereGeometry
-        -texture: String
-        -speed: Number
-        -speedOrbita: Number
-        -material: MeshStandardMaterial
-        -mesh: Mesh
-        -grupo: Group
-        -lua: Lua
-        +constructor(radius, texture, position, scene)
-        +setOpacity(opacity)
-        +setSpeed(speed)
-        +tick()
-        +materialTerra()
-    }
-
-    class Lua {
-        <<Entity>>
-        -radius: Number
-        -geometry: SphereGeometry
-        -texture: String
-        -material: MeshStandardMaterial
-        -mesh: Mesh
-        +constructor()
-        +tick()
-    }
-
-    class Main {
-        <<Controller>>
-
-        -renderer: WebGLRenderer
-        -camera: PerspectiveCamera
-        -controls: TrackballControls
-        -scene: Scene
-        -planetas: Array
-        +adicionaLuz()
-        +criarEstrelas()
-        +criarSistemaSolar()
-        +criarPlanetas()
-        +criarSol()
-        +animate()
-    }
-
-    Planeta --> Lua : contém
-    Main --> Planeta : cria e gerencia
-    Main --> THREE : utiliza
-    Main --> TrackballControls : utiliza
-    Lua --> THREE : utiliza
-    Planeta --> THREE : utiliza
+ class THREE {
+ <<Library>>
+ +WebGLRenderer
+ +PerspectiveCamera
+ +Scene
+ +SphereGeometry
+ +MeshBasicMaterial
+ +MeshStandardMaterial
+ +MeshPhongMaterial
+ +Mesh
+ +AmbientLight
+ +PointLight
+ +TextureLoader
+ +Group
+ +Vector2
+ +Color
+ +RingGeometry
+ }
+ class TrackballControls {
+ <<Library>>
+ -camera
+ -domElement
+ +update()
+ }
+ class Planeta {
+ <<Entity>>
+ -radius: Number
+ -position: Object
+ -distanceSol: Number
+ -geometry: SphereGeometry
+ -texture: String
+ -speed: Number
+ -speedOrbita: Number
+ -material: MeshStandardMaterial
+ -mesh: Mesh
+ -grupo: Group
+ -lua: Lua
+ -atmosfera: Atmosfera
+ -anel: Anel
+ +constructor(radius, texture, position, scene, atmosphere, lua, earth, anel)
+ +rotate()
+ +translate()
+ +tick()
+ +materialGenerico()
+ +materialTerra()
+ }
+ class Lua {
+ <<Entity>>
+ -radius: Number
+ -geometry: SphereGeometry
+ -texture: String
+ -material: MeshStandardMaterial
+ -mesh: Mesh
+ +constructor()
+ +tick()
+ }
+ class Atmosfera {
+ <<Entity>>
+ -radius: Number
+ -geometry: SphereGeometry
+ -texture: Texture
+ -material: MeshStandardMaterial
+ -mesh: Mesh
+ +constructor(radius)
+ +tick()
+ }
+ class Anel {
+ <<Entity>>
+ -radius: Number
+ -geometry: RingGeometry
+ -texture: String
+ -material: MeshPhongMaterial
+ -mesh: Mesh
+ +constructor(radius)
+ +tick()
+ }
+ class Main {
+ <<Controller>>
+ -renderer: WebGLRenderer
+ -camera: PerspectiveCamera
+ -controls: TrackballControls
+ -scene: Scene
+ -planetas: Array
+ +adicionaLuz()
+ +criarEstrelas()
+ +criarSistemaSolar()
+ +criarPlanetas()
+ +criarSol()
+ +animate()
+ }
+ Planeta --> Lua : cria e contém
+ Planeta --> Atmosfera : cria e contém
+ Planeta --> Anel : cria e contém
+ Main --> Planeta : cria e gerencia
+ Main --> THREE : utiliza
+ Main --> TrackballControls : utiliza
+ Lua --> THREE : utiliza
+ Planeta --> THREE : utiliza
+ Atmosfera --> THREE : utiliza
+ Anel --> THREE : utiliza
 ```
 
 
