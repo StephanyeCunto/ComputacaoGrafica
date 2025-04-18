@@ -55,13 +55,8 @@ function criarPlanetas() {
     planetas.push(netuno);
     const urano = new planeta(4, 'src/img/2k_uranus.jpg', { x: 200, y: 0, z: 0 }, scene);
     planetas.push(urano);
-    const terra = new planeta(6, 'earth', { x: 90, y: 0, z: 0 }, scene);
+    const terra = new planeta(6, 'earth', { x: 90, y: 0, z: 0 }, scene, true, true, true);
     planetas.push(terra);
-    
-    const nuvem = new planeta(6.02, 'https://threejs.org/examples/textures/planets/earth_clouds_1024.png', { x:90, y: 0, z: 0 }, scene);
-    nuvem.setOpacity(0.8);
-    nuvem.setSpeed(0.015);
-    planetas.push(nuvem);
 }
 
 function criarSol() {
@@ -81,13 +76,12 @@ function criarSol() {
     scene.add(sol);
 }
 
-
 function animate() {
     requestAnimationFrame(animate);
     scene.getObjectByName('sol').tick();
 
    planetas.forEach(planet => {
-       planet.tick();
+      planet.tick();
     });
 
     controls.update();

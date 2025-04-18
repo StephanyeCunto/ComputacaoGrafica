@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { Lua } from './lua.js';
 
 export class planeta{
-    constructor(radius, texture, position,scene){
+    constructor(radius, texture, position,scene, atmosphere, lua, earth){
         this.radius = radius;
         this.position = position;
         this.distanceSol = position.x;
@@ -14,10 +14,17 @@ export class planeta{
 
         const grupo = new THREE.Group();
         this.grupo = grupo;
-        if(texture == "earth"){
-            this.material = this.materialTerra(); 
+        if(atmosphere){
+            const atmosfera = this.criarAtmosfera();
+            this.atmosfera = atmosfera;
+            grupo.add(atmosfera);
+        }
+        if(lua){
             this.lua = new Lua();
             grupo.add(this.lua.mesh);
+        }
+        if(earth){
+            this.material = this.materialTerra(); 
         }else{
             this.material = new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load(this.texture), 
                 roughness: 0.9,
@@ -31,31 +38,33 @@ export class planeta{
         scene.add(grupo);
     }
 
-    addToScene(scene){
-        scene.add(this.mesh);
-    }
-
-    setOpacity(opacity){
-        this.material.transparent = true;
-        this.material.opacity = opacity;
-    }
-
-    setSpeed(speed){
-        this.speed = speed;
-    }
-
-    rotate(){
-        this.mesh.rotation.y += this.speed;
-    }
-
     tick(){
-        this.rotate();
+        this.mesh.rotation.y += this.speed;
         this.grupo.position.x =  Math.sin(Date.now() * this.speedOrbita)* this.distanceSol;
         this.grupo.position.z =  Math.cos(Date.now() * this.speedOrbita)* this.distanceSol;
         this.grupo.position.y = this.position.y;  
-        if(this.lua){
-           this.lua.tick(this.position);
-        } 
+        if(this.atmosfera){
+            this.lua.tick();
+            this.atmosfera.tick();
+        }
+    }
+
+    criarAtmosfera(){
+        const geometryAtmosfera = new THREE.SphereGeometry(this.radius + 0.02, 64, 64);
+        const texturaAtmosfera = new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_clouds_1024.png');
+        const materialAtmosfera = new THREE.MeshStandardMaterial({ map:texturaAtmosfera, 
+            roughness: 0.9,
+            metalness: 0.1 
+        });
+        materialAtmosfera.opacity = 0.8;
+        materialAtmosfera.transparent = true;
+
+        const atmosfera = new THREE.Mesh(geometryAtmosfera, materialAtmosfera);
+
+        atmosfera.tick = () => {
+            atmosfera.rotation.y += 0.005;
+        }
+        return atmosfera;
     }
 
     materialTerra(){
