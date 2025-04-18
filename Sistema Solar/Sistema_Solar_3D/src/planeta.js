@@ -1,9 +1,11 @@
 import * as THREE from 'three';
 
 import { Lua } from './lua.js';
+import { Anel } from './anel.js';
+import { Atmosfera } from './atmosfera.js';
 
 export class Planeta{
-    constructor( radius, texture, position,scene, atmosphere, lua, earth){
+    constructor( radius, texture, position,scene, atmosphere, lua, earth, anel){
         this.radius = radius;
         this.position = position;
         this.distanceSol = position.x;
@@ -16,6 +18,7 @@ export class Planeta{
         this.grupo = grupo;
         if(atmosphere) this.criarAtmosfera();
         if(lua) this.criarLua();
+        if(anel) this.criarAnel();
         this.material = earth ? this.materialTerra() : this.material = this.materialGenerico()
 
         this.mesh = new THREE.Mesh(this.geometry, this.material);
@@ -39,6 +42,7 @@ export class Planeta{
         this.translate();
         if(this.atmosfera) this.atmosfera.tick();
         if(this.lua) this.lua.tick();
+        if(this.anel) this.anel.tick();
     }
 
     criarLua(){
@@ -47,24 +51,16 @@ export class Planeta{
         this.lua = lua;
     }
 
+    criarAnel() {
+        const anel = new Anel(this.radius);
+        this.grupo.add(anel.mesh);
+        this.anel = anel;
+      }
+
     criarAtmosfera(){
-        const geometryAtmosfera = new THREE.SphereGeometry(this.radius + 0.02, 64, 64);
-        const texturaAtmosfera = new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_clouds_1024.png');
-        const materialAtmosfera = new THREE.MeshStandardMaterial({ map:texturaAtmosfera, 
-            roughness: 0.9,
-            metalness: 0.1 
-        });
-        materialAtmosfera.opacity = 0.8;
-        materialAtmosfera.transparent = true;
-
-        const atmosfera = new THREE.Mesh(geometryAtmosfera, materialAtmosfera);
-
-        atmosfera.tick = () => {
-            atmosfera.rotation.y += 0.02;
-        }
-
+        const atmosfera = new Atmosfera(this.radius);
+        this.grupo.add(atmosfera.mesh);
         this.atmosfera = atmosfera;
-        this.grupo.add(atmosfera);
     }
 
     materialGenerico(){
