@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 import { Planeta } from './planeta.js';
+import { Sol } from './sol.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -15,19 +16,20 @@ const controls = new TrackballControls(camera, renderer.domElement);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000510);
 const planetasScene = [];
+const sol = new Sol();
 
 adicionaLuz();
 criarSistemaSolar();
 animate();
 
 function criarSistemaSolar(){
-    criarSol();
+    scene.add(sol.Mesh);
     criarPlanetas();
 }
 
 function adicionaLuz() {
     const luzAmbiente = new THREE.AmbientLight(0x404040, 0.5); 
-    const luzSolar = new THREE.PointLight(0xffffff, 2, 2000, 0.1);
+    const luzSolar = new THREE.PointLight(0xf9e8c3, 2, 2000, 0.1);
     luzSolar.position.set(0, 0, 0);
     scene.add(luzAmbiente, luzSolar);
  }
@@ -52,27 +54,9 @@ function criarPlanetas() {
     }
 }
 
-function criarSol() {
-    const raio = 20;
-    const segmentos = 64;
-    const solGeometry = new THREE.SphereGeometry(raio, segmentos, segmentos);
-    const texturaSol = new THREE.TextureLoader().load('/src/img/8k_sun.jpg');
-    const material = new THREE.MeshBasicMaterial({ map: texturaSol});
-    const sol = new THREE.Mesh(solGeometry, material);
-    sol.position.set(0, 0, 0);
-    sol.name = 'sol';
-
-    sol.tick = () => {
-        sol.rotation.y+= 0.001;
-    };
-
-    scene.add(sol);
-}
-
 function animate() {
     requestAnimationFrame(animate);
-    scene.getObjectByName('sol').tick();
-
+    sol.tick();
     planetasScene.forEach(planet => {
         planet.tick();
     });

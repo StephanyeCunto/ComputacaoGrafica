@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "Projeto de visualização do Sistema Solar",
   "main": "index.js",
+
+  "devDependencies": {
+      "@eslint/js": "^9.25.0",
+      "eslint": "^9.25.0",
+      "eslint-plugin-react": "^7.37.5",
+      "globals": "^16.0.0"
+    },
   "scripts": {
     "start": "vite",
     "build": "vite build",

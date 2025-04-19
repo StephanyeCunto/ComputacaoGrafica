@@ -173,6 +173,18 @@ classDiagram
  +constructor(radius)
  +tick()
  }
+
+ class Sol {
+<<Entity>>
+-radius: Number
+ -geometry: SphereGeometry
+ -texture: Texture
+ -material: MeshBasicMaterial
+ -mesh: Mesh
+ +constructor()
+ +tick()
+ }
+ 
  class Main {
  <<Controller>>
  -renderer: WebGLRenderer
@@ -180,11 +192,11 @@ classDiagram
  -controls: TrackballControls
  -scene: Scene
  -planetas: Array
+ -sol: Sol
  +adicionaLuz()
  +criarEstrelas()
  +criarSistemaSolar()
  +criarPlanetas()
- +criarSol()
  +animate()
  }
  Planeta --> Lua : cria e contém
