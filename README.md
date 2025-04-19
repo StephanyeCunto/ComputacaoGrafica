@@ -206,10 +206,10 @@ classDiagram
  Planeta --> Lua : cria e contém
  Planeta --> Atmosfera : cria e contém
  Planeta --> Anel : cria e contém
- Main --> Planeta : cria e gerencia
- Main --> Sol : cria e gerencia
- Main --> THREE : utiliza
- Main --> TrackballControls : utiliza
+ Index --> Planeta : cria e gerencia
+ Index --> Sol : cria e gerencia
+ Index --> THREE : utiliza
+ Index --> TrackballControls : utiliza
  Lua --> THREE : utiliza
  Planeta --> THREE : utiliza
  Atmosfera --> THREE : utiliza
@@ -227,7 +227,7 @@ classDiagram
 
 2. Navegue até a pasta do projeto:
    ```bash
-   cd Sistema_Solar-3D
+   cd Sistema_Solar/Sistema_Solar_3D
    ```
 
 3. Instale as dependências:
@@ -237,7 +237,7 @@ classDiagram
 
 4. Execute o servidor de desenvolvimento:
    ```bash
-   npm run dev
+   npm start
    ```
 
 5. Abra o navegador e acesse `http://localhost:3000`
