@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 import { Planeta } from './planeta.js';
 import { Sol } from './sol.js';
+import { Estrela } from './estrela.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -22,8 +23,15 @@ adicionaLuz();
 criarSistemaSolar();
 animate();
 
+
+function criarEstrela() {
+    scene.add(new Estrela().Mesh);
+  }
+
 function criarSistemaSolar(){
     scene.add(sol.Mesh);
+    criarEstrela();
+
     criarPlanetas();
 }
 
