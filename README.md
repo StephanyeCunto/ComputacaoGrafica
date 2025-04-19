@@ -189,6 +189,17 @@ classDiagram
  +tick()
  }
 
+ class Estrela{
+<<Entity>>
+-largura: Number
+-altura: Number
+-grupo : Group
+-mesh: Mesh
++constructor()
++randonPosition()
++criarEstrela(radius, position)
+}
+
  class Index {
  <<Controller>>
  -renderer: WebGLRenderer
@@ -198,23 +209,25 @@ classDiagram
  -planetas: Array
  -sol: Sol
  +adicionaLuz()
- +criarEstrelas()
  +criarSistemaSolar()
  +criarPlanetas()
  +animate()
  }
+
  Planeta --> Lua : cria e contém
  Planeta --> Atmosfera : cria e contém
  Planeta --> Anel : cria e contém
  Planeta --> THREE : utiliza
  Index --> Planeta : cria e gerencia
  Index --> Sol : cria e gerencia
+ Index --> Estrela : cria
  Index --> THREE : utiliza
  Index --> TrackballControls : utiliza
  Lua --> THREE : utiliza
  Atmosfera --> THREE : utiliza
  Anel --> THREE : utiliza
  Sol --> THREE : utiliza
+ Estrela --> THREE : utiliza
 ```
 
 

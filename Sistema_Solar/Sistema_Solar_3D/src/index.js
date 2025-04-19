@@ -23,15 +23,9 @@ adicionaLuz();
 criarSistemaSolar();
 animate();
 
-
-function criarEstrela() {
-    scene.add(new Estrela().Mesh);
-  }
-
 function criarSistemaSolar(){
     scene.add(sol.Mesh);
-    criarEstrela();
-
+    new Estrela(scene);
     criarPlanetas();
 }
 

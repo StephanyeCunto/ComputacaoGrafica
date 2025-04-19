@@ -1,26 +1,28 @@
 import * as THREE from 'three';
 
 export class Estrela {
-    constructor() {
+    constructor(scene) {
         this.largura = window.innerWidth;
         this.altura = window.innerHeight;
         const grupo = new THREE.Group();
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 2000; i++) {
             grupo.add(this.criarEstrela(Math.random() * 2, this.randonPosition()));
         }
 
         this.Mesh = grupo;
+        scene.add(this.Mesh);
     }
 
     randonPosition() {
-        const x = (Math.random() - 0.5) * this.largura;
-        const y = (Math.random() - 0.5) * this.altura;
+        const z = (Math.random() - 0.5) * this.largura;
         
-        let z;
+        let x;
+        let y;
         do {
-            z = (Math.random() - 0.5) * this.largura;
-        } while (Math.abs(z) < 220);
+            x = (Math.random() - 0.5) * this.largura;
+            y = (Math.random() - 0.5) * this.altura;
+        } while (Math.abs(x) < 220 && Math.abs(y) < 220 && Math.abs(z) < 220);
 
         return { x, y, z };
     }
