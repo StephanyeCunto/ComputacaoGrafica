@@ -308,11 +308,11 @@ O código está estruturado em classes e funções modulares:
 ### Classes Principais
 
    1. **Classe planeta**:
-    - Responsável pela criação dos planetas
-    - Gerencia as propriedades físicas como raio, posição e velocidade
-    - Implementa o comportamento de rotação e órbita
-    - Configura materiais e texturas específicas para cada planeta
-    - No caso da Terra, cria uma instância da classe Lua e gerencia as nuvens
+      - Responsável pela criação dos planetas
+      - Gerencia as propriedades físicas como raio, posição e velocidade
+      - Implementa o comportamento de rotação e órbita
+      - Configura materiais e texturas específicas para cada planeta
+      - No caso da Terra, cria uma instância da classe Lua e gerencia as nuvens
 
 2. **Classe Lua**:
    - Implementa o satélite natural da Terra
@@ -334,7 +334,7 @@ O código está estruturado em classes e funções modulares:
    - Utiliza uma geometria de anel com textura transparente
    - Possui inclinação e rotação próprias
 
-6.**Classe Estrela**:
+6. **Classe Estrela**:
     - Implementa um campo de estrelas como pano de fundo para a cena
     - Cria milhares de pontos luminosos posicionados aleatoriamente em 3D
     - Utiliza THREE.Points e BufferGeometry para renderização eficiente
