@@ -57,7 +57,7 @@ export class Planeta{
     }
 
     materialTerra(){
-        const texturaTerra = new THREE.TextureLoader().load('/src/img/8k_earth_daymap.jpg');
+        const texturaTerra = new THREE.TextureLoader().load('/src/assets/textures/8k_earth_daymap.jpg');
         const normalMap = new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_normal_2048.jpg');
         const material = new THREE.MeshStandardMaterial({
             map: texturaTerra,
