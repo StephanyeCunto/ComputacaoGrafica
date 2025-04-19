@@ -4,7 +4,7 @@ export class Lua{
     constructor (){
         this.radius = 2;
         this.geometry = new THREE.SphereGeometry(this.radius, 64, 64);
-        this.texture = "https://threejs.org/examples/textures/planets/moon_1024.jpg";
+        this.texture = "src/assets/textures/8k_moon.jpg";
         this.material = new THREE.MeshStandardMaterial({ 
             map: new THREE.TextureLoader().load(this.texture),
             roughness: 0.8,

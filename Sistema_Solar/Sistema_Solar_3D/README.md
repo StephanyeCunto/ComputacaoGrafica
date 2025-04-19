@@ -2,7 +2,6 @@
 
 ![Banner do Sistema Solar](https://img.shields.io/badge/Computação%20Gráfica-Sistema%20Solar%203D-blue)
 [![Three.js](https://img.shields.io/badge/Three.js-black?logo=three.js&logoColor=white)]()
-[![wakatime](https://wakatime.com/badge/user/5a343522-23db-45ae-b20b-54655c392390/project/124beb58-3e33-4c8a-aec4-33dc1bf1bcfc.svg)](https://wakatime.com/badge/user/5a343522-23db-45ae-b20b-54655c392390/project/124beb58-3e33-4c8a-aec4-33dc1bf1bcfc)
 
 Uma simulação 3D interativa do Sistema Solar desenvolvida com Three.js como parte da disciplina de Computação Gráfica.A aplicação renderiza o Sol, algumas estrelas e os planetas do Sistema Solar com suas respectivas órbitas, rotações e características visuais.
 
