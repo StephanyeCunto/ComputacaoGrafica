@@ -46,7 +46,7 @@ Este projeto implementa uma simulação 3D do Sistema Solar utilizando a bibliot
 
 ![Detalhes da Terra](/img/Terra_Detalhe.mov)
 <br>
-*Close na Terra mostrando detalhes das nuvens *
+*Close na Terra mostrando detalhes das nuvens*
 
 ### Tecnologias Utilizadas
 

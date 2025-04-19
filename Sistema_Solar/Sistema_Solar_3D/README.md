@@ -66,7 +66,7 @@ Desenvolvido como parte da disciplina de Computação Gráfica, o projeto demons
 
 ![Detalhes da Terra](/img/Terra_Detalhe.mov)
 <br>
-*Close na Terra mostrando detalhes das nuvens *
+*Close na Terra mostrando detalhes das nuvens*
 
 ## 🔧 Tecnologias
 
