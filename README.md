@@ -40,14 +40,11 @@ Este projeto implementa uma simulação 3D do Sistema Solar utilizando a bibliot
 
 ### Capturas de Tela
 
-![Visão Geral do Sistema Solar](/path/to/screenshot1.png)
+![Visão Geral do Sistema Solar](/img/Sistema_Solar.png)
 *Visão panorâmica de todo o sistema solar*
 
-![Detalhes da Terra e Lua](/path/to/screenshot2.png)
-*Close na Terra mostrando detalhes das nuvens e a lua em órbita*
-
-![Saturno e seus Anéis](/path/to/screenshot3.png)
-*Detalhe de Saturno com seus característicos anéis*
+![Detalhes da Terra](/img/Terra_Detalhe.mov)
+*Close na Terra mostrando detalhes das nuvens *
 
 ### Tecnologias Utilizadas
 
@@ -81,7 +78,9 @@ Este projeto implementa uma simulação 3D do Sistema Solar utilizando a bibliot
 │   ├── lua.js           # Classe para criação e controle do sol
 │   ├── atmosfera.js     # Classe para criação da atmosfera (nuvens) da Terra
 │   ├── anel.js          # Classe para criação dos anéis de Saturno
-│   └── img/             # Texturas dos planetas e do sol
+│   ├── estrela.js       # Classe para criação do campo de estrelas de fundo
+│   └── assets/
+│       └── textures/    # Texturas dos planetas e do sol
 │       ├── 8k_sun.jpg
 │       ├── 8k_mercury.jpg
 │       ├── 8k_venus_surface.jpg
@@ -271,41 +270,40 @@ O código está estruturado em classes e funções modulares:
 - `sol.js`: Classe dedicada à criação e comportamento do Sol.
 - `atmosfera.js`: Classe para simular a camada de nuvens da Terra.
 - `anel.js`: Classe para criar e gerenciar os anéis de Saturno.
+- `estrela.js`: Classe para implementar um campo de estrelas como background.
 
 #### Detalhes da Implementação das Classes
 
-1. **Classe planeta**:
-   - Responsável pela criação dos planetas
-   - Gerencia as propriedades físicas como raio, posição e velocidade
-   - Implementa o comportamento de rotação e órbita
-   - Configura materiais e texturas específicas para cada planeta
-   - No caso da Terra, cria uma instância da classe Lua e gerencia as nuvens
+1. **`Planeta`**:
+   - Encapsula a criação, renderização e comportamento de cada planeta
+   - Gerencia componentes associados como lua e atmosfera
+   - Implementa movimentos de rotação e translação com física simplificada
 
-2. **Classe Lua**:
-   - Implementa o satélite natural da Terra
-   - Gerencia a órbita em torno da Terra
-   - Usa textura específica para representação realista
-     
-3. **Classe Sol**:
-  - Implementa o corpo central do sistema solar
-  - Cria uma esfera com textura solar e material básico emissivo
-  - Realiza rotação sobre seu próprio eixo
-    
-4. **Classe Atmosfera**:
-   - Simula a camada de nuvens da Terra
-   - Utiliza material semi-transparente
-   - Possui rotação própria mais rápida que o planeta
+2. **`Sol`**:
+   - Centro do sistema simulado
+   - Implementa material emissivo para simular luz própria
+   - Fonte de iluminação para os planetas (PointLight)
 
-5. **Classe Anel**:
-   - Implementa os anéis de Saturno
-   - Utiliza uma geometria de anel com textura transparente
-   - Possui inclinação e rotação próprias
+3. **`Lua`**:
+   - Satélite natural com órbita própria em torno da Terra
+   - Sincronização de movimento com o planeta hospedeiro
 
-6. **Index (Arquivo principal)**:
+4. **`Atmosfera`**:
+   - Camada adicional para representar nuvens terrestres
+   - Material semi-transparente com animação própria
+
+5. **`Anel`**:
+   - Geometria específica para os anéis de Saturno
+   - Textura com canal alpha para transparência
+
+6. **`Estrela`**:
+   - Sistema otimizado para renderizar milhares de pontos
+   - Distribuição aleatória para criar o efeito de céu estrelado
+
+7. *`*Index (Arquivo principal)`**:
    - Configura o ambiente de renderização
    - Gerencia o ciclo de animação
-   - Cria e organiza todos os objetos do sistema solar
-   - Implementa iluminação e controles de câmera
+
 
 ### Desafios e Soluções
 
@@ -322,3 +320,9 @@ O código está estruturado em classes e funções modulares:
 - [Documentação do Three.js](https://threejs.org/docs/)
 - [Solar System Scope](https://www.solarsystemscope.com/) - Referência visual
 - [NASA Solar System Exploration](https://solarsystem.nasa.gov/) - Texturas e informações sobre os planetas
+
+---
+<div align="center">
+  <p>Desenvolvido como projeto para a disciplina de Computação Gráfica</p>
+  <p>© 2025 - <a href="https://github.com/StephanyeCunto">Stephanye Cunto</a></p>
+</div>
