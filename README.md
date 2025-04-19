@@ -302,7 +302,7 @@ O código está estruturado em classes e funções modulares:
    - Sistema otimizado para renderizar milhares de pontos
    - Distribuição aleatória para criar o efeito de céu estrelado
 
-7. *`*Index (Arquivo principal)`**:
+7. **`Index (Arquivo principal)`**:
    - Configura o ambiente de renderização
    - Gerencia o ciclo de animação
 

@@ -6,7 +6,7 @@ export class Estrela {
         this.altura = window.innerHeight;
         const grupo = new THREE.Group();
 
-        for (let i = 0; i < 2000; i++) {
+        for (let i = 0; i < 10000; i++) {
             grupo.add(this.criarEstrela(Math.random() * 2, this.randonPosition()));
         }
 
