@@ -75,9 +75,12 @@ Este projeto implementa uma simulação 3D do Sistema Solar utilizando a bibliot
 /
 ├── index.html           # Página principal da aplicação
 ├── src/
-│   ├── main.js          # Arquivo principal com inicialização da cena
+│   ├── index.js          # Arquivo principal com inicialização da cena
 │   ├── planeta.js       # Classe para criação e controle dos planetas
-│   ├── lua.js           # Classe para criação e controle da lua
+│   ├── sol.js           # Classe para criação e controle do sol
+│   ├── lua.js           # Classe para criação e controle do sol
+│   ├── atmosfera.js     # Classe para criação da atmosfera (nuvens) da Terra
+│   ├── anel.js          # Classe para criação dos anéis de Saturno
 │   └── img/             # Texturas dos planetas e do sol
 │       ├── 8k_sun.jpg
 │       ├── 8k_mercury.jpg
@@ -86,6 +89,7 @@ Este projeto implementa uma simulação 3D do Sistema Solar utilizando a bibliot
 │       ├── 8k_mars.jpg
 │       ├── 8k_jupiter.jpg
 │       ├── 8k_saturn.jpg
+│       ├── 8k_saturn_ring_alpha.png
 │       ├── 2k_neptune.jpg
 │       └── 2k_uranus.jpg
 ```
@@ -184,8 +188,8 @@ classDiagram
  +constructor()
  +tick()
  }
- 
- class Main {
+
+ class Index {
  <<Controller>>
  -renderer: WebGLRenderer
  -camera: PerspectiveCamera
@@ -203,12 +207,14 @@ classDiagram
  Planeta --> Atmosfera : cria e contém
  Planeta --> Anel : cria e contém
  Main --> Planeta : cria e gerencia
+ Main --> Sol : cria e gerencia
  Main --> THREE : utiliza
  Main --> TrackballControls : utiliza
  Lua --> THREE : utiliza
  Planeta --> THREE : utiliza
  Atmosfera --> THREE : utiliza
  Anel --> THREE : utiliza
+ Sol --> THREE : utiliza
 ```
 
 
@@ -246,9 +252,12 @@ classDiagram
 
 O código está estruturado em classes e funções modulares:
 
-- `main.js`: Configura o renderer, câmera, controles e cena. Gerencia a animação.
+- `index.js`: Configura o renderer, câmera, controles e cena. Gerencia a animação.
 - `planeta.js`: Classe responsável pela criação e comportamento dos planetas.
 - `lua.js`: Classe para simular a lua e sua órbita.
+- `sol.js`: Classe dedicada à criação e comportamento do Sol.
+- `atmosfera.js`: Classe para simular a camada de nuvens da Terra.
+- `anel.js`: Classe para criar e gerenciar os anéis de Saturno.
 
 #### Detalhes da Implementação das Classes
 
@@ -263,8 +272,23 @@ O código está estruturado em classes e funções modulares:
    - Implementa o satélite natural da Terra
    - Gerencia a órbita em torno da Terra
    - Usa textura específica para representação realista
+     
+3. **Classe Sol**:
+  - Implementa o corpo central do sistema solar
+  - Cria uma esfera com textura solar e material básico emissivo
+  - Realiza rotação sobre seu próprio eixo
+    
+4. **Classe Atmosfera**:
+   - Simula a camada de nuvens da Terra
+   - Utiliza material semi-transparente
+   - Possui rotação própria mais rápida que o planeta
 
-3. **Main (Arquivo principal)**:
+5. **Classe Anel**:
+   - Implementa os anéis de Saturno
+   - Utiliza uma geometria de anel com textura transparente
+   - Possui inclinação e rotação próprias
+
+6. **Index (Arquivo principal)**:
    - Configura o ambiente de renderização
    - Gerencia o ciclo de animação
    - Cria e organiza todos os objetos do sistema solar
