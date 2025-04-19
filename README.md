@@ -102,22 +102,22 @@ O diagrama a seguir ilustra a estrutura de classes da aplicação e seus relacio
 ```mermaid
 classDiagram
  class THREE {
- <<Library>>
- +WebGLRenderer
- +PerspectiveCamera
- +Scene
- +SphereGeometry
- +MeshBasicMaterial
- +MeshStandardMaterial
- +MeshPhongMaterial
- +Mesh
- +AmbientLight
- +PointLight
- +TextureLoader
- +Group
- +Vector2
- +Color
- +RingGeometry
+   <<Library>>
+   +WebGLRenderer
+   +PerspectiveCamera
+   +Scene
+   +SphereGeometry
+   +MeshBasicMaterial
+   +MeshStandardMaterial
+   +MeshPhongMaterial
+   +Mesh
+   +AmbientLight
+   +PointLight
+   +TextureLoader
+   +Group
+   +Vector2
+   +Color
+   +RingGeometry
  }
  class TrackballControls {
  <<Library>>
@@ -206,12 +206,12 @@ classDiagram
  Planeta --> Lua : cria e contém
  Planeta --> Atmosfera : cria e contém
  Planeta --> Anel : cria e contém
+ Planeta --> THREE : utiliza
  Index --> Planeta : cria e gerencia
  Index --> Sol : cria e gerencia
  Index --> THREE : utiliza
  Index --> TrackballControls : utiliza
  Lua --> THREE : utiliza
- Planeta --> THREE : utiliza
  Atmosfera --> THREE : utiliza
  Anel --> THREE : utiliza
  Sol --> THREE : utiliza
