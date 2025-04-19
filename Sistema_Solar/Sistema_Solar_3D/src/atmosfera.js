@@ -4,8 +4,8 @@ export class Atmosfera{
     constructor(radius){
         this.radius = radius;
         this.geometry = new THREE.SphereGeometry(this.radius + 0.02, 64, 64);
-        this.texture = new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_clouds_1024.png');
-        this.material= new THREE.MeshStandardMaterial({ map:this.texture, 
+        this.texture = 'https://threejs.org/examples/textures/planets/earth_clouds_1024.png';
+        this.material= new THREE.MeshStandardMaterial({ map:new THREE.TextureLoader().load(this.texture), 
             roughness: 0.9,
             metalness: 0.1 
         });
