@@ -42,7 +42,7 @@ Este projeto implementa uma simulação 3D do Sistema Solar utilizando a bibliot
 
 
 <figure class="video_container">
-  <iframe src="/img//img/Sistema_Solar_3D.mov" frameborder="0" allowfullscreen="true"> 
+  <iframe src="/img/Sistema_Solar_3D.mov" frameborder="0" allowfullscreen="true"> 
 </iframe>
 </figure>
 <br>
