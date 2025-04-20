@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 
 import {Terra} from './terra.js';
+import {Estrela} from './estrela.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -18,6 +19,7 @@ scene.background = new THREE.Color(0x000510);
 
 animate();
 new Terra(scene);
+new Estrela(scene);
 adicionarLuz();
 
 function adicionarLuz(){
