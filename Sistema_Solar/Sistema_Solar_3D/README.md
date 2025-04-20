@@ -60,11 +60,11 @@ Desenvolvido como parte da disciplina de Computação Gráfica, o projeto demons
 
 ## 📸 Demonstração
 
-![Visão Geral do Sistema Solar](/img/Sistema_Solar_3D.mp4)
+![Visão Geral do Sistema Solar](/img/Sistema_Solar_3D.mov)
 <br>
 *Visão panorâmica de todo o sistema solar*
 
-![Detalhes da Terra](/img/Terra_Detalhe.mp4)
+![Detalhes da Terra](/img/Terra_Detalhe.mov)
 <br>
 *Close na Terra mostrando detalhes das nuvens*
 
