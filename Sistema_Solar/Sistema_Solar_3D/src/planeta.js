@@ -19,9 +19,9 @@ export class Planeta{
 
         if(atmosfera) grupo.add((this.atmosfera = new Atmosfera(this.radius)).mesh);
         if(lua) grupo.add((this.lua = new Lua()).mesh);
-        if(anel)  grupo.add((this.anel = new Anel(this.radius)).mesh);
+        if(anel) grupo.add((this.anel = new Anel(this.radius)).mesh);
 
-        this.material = earth ? this.materialTerra() : this.material = this.materialGenerico()
+        this.material = earth ? this.materialTerra() : this.material = this.materialGenerico();
 
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.grupo.position.set(this.position.x, this.position.y, this.position.z);

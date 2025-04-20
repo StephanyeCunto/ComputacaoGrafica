@@ -9,13 +9,12 @@ export class Anel{
             map:new THREE.TextureLoader().load(this.texture),
             transparent: true,
             side: THREE.DoubleSide,
-            depthWrite: false,     
-            alphaTest: 0.1,      
+            opacity: 0.8,
             blending: THREE.AdditiveBlending,  
             emissive: 0x222222   
         });
         this.mesh = new THREE.Mesh(this.geometry, this.material);
-        this.mesh.rotation.x = (-Math.PI / 2) - 0.2;
+        this.mesh.rotation.x = (Math.PI / 2) +0.2;
     }
 
     tick(){

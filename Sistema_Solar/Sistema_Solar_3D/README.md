@@ -209,6 +209,7 @@ classDiagram
  -texture: Texture
  -material: MeshBasicMaterial
  -mesh: Mesh
+ -color: Number
  +constructor()
  +tick()
  }

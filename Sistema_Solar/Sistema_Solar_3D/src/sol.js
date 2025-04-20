@@ -6,7 +6,7 @@ export class Sol{
         this.geometry = new THREE.SphereGeometry(this.radius, 64, 64);
         this.texture = new THREE.TextureLoader().load('/src/assets/textures/8k_sun.jpg');
         this.material = new THREE.MeshBasicMaterial({
-                color: 0xffff00,
+                color: 0xffdd77,
                 map: this.texture
               });
         this.Mesh = new THREE.Mesh(this.geometry, this.material);
