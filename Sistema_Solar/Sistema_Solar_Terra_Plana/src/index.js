@@ -17,10 +17,20 @@ const controls = new TrackballControls(camera, renderer.domElement);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000510);
 
-animate();
-new Terra(scene);
-new Estrela(scene);
+let terra;
+
+criarSistema();
 adicionarLuz();
+animate();
+
+
+function criarSistema(){
+  const grupoTerra = new THREE.Group();
+  grupoTerra.add((terra =new Terra()).grupo);
+  grupoTerra.rotation.x = Math.PI/7;
+
+  scene.add(grupoTerra);
+}
 
 function adicionarLuz(){
   //const luzAmbiente = new THREE.AmbientLight(0x404040, 0.5); 
@@ -30,7 +40,7 @@ function adicionarLuz(){
 
 function animate() {
   requestAnimationFrame(animate);
-
+  terra.tick();
   controls.update();
   renderer.render(scene, camera);
 }

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { Estrela } from './estrela';
+import { Sol } from './sol';
 
 export class Domo{
     constructor(radius){
@@ -17,6 +18,10 @@ export class Domo{
         this.mesh.position.set(0, 0, 0);
 
         this.grupo = new THREE.Group();
-        this.grupo.add(this.mesh,new Estrela(this.radius).Mesh);
+        this.grupo.add(this.mesh,(this.sol = new Sol(this.radius)).Mesh,new Estrela(this.radius).Mesh);
+    }
+
+    tick(){
+        this.sol.tick();
     }
 }
