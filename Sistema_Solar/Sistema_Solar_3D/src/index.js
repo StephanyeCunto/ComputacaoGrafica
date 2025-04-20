@@ -19,7 +19,7 @@ scene.background = new THREE.Color(0x000510);
 const planetasScene = [];
 const sol = new Sol();
 
-adicionaLuz();
+adicionarLuz();
 criarSistemaSolar();
 animate();
 
@@ -29,7 +29,7 @@ function criarSistemaSolar(){
     criarPlanetas();
 }
 
-function adicionaLuz() {
+function adicionarLuz() {
     const luzAmbiente = new THREE.AmbientLight(0x404040, 0.5); 
     const luzSolar = new THREE.PointLight(0xf9e8c3, 4, 2000, 0.1);
     luzSolar.position.set(0, 0, 0);
