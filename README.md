@@ -40,11 +40,11 @@ Este projeto implementa uma simulação 3D do Sistema Solar utilizando a bibliot
 
 ### Capturas de Tela
 
-![Visão Geral do Sistema Solar](/img/Sistema_Solar_3D.mov)
+![Visão Geral do Sistema Solar](/img/Sistema_Solar_3D.mp4)
 <br>
 *Visão panorâmica de todo o sistema solar*
 
-![Detalhes da Terra](/img/Terra_Detalhe.mov)
+![Detalhes da Terra](/img/Terra_Detalhe.mp4)
 <br>
 *Close na Terra mostrando detalhes das nuvens*
 
