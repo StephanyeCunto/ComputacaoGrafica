@@ -196,6 +196,7 @@ classDiagram
 -altura: Number
 -grupo : Group
 -mesh: Mesh
+-color: Number
 +constructor()
 +randonPosition()
 +criarEstrela(radius, position)
