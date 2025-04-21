@@ -8,16 +8,15 @@ export class Anel{
         this.material = new THREE.MeshPhongMaterial({
             map:new THREE.TextureLoader().load(this.texture),
             transparent: true,
-            side: THREE.DoubleSide,
             opacity: 0.8,
             blending: THREE.AdditiveBlending,  
             emissive: 0x222222   
         });
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
-        this.mesh.rotation.x = (Math.PI / 2) +0.2;
+        this.Mesh = new THREE.Mesh(this.geometry, this.material);
+        this.Mesh.rotation.x = (Math.PI / 2) +0.2;
     }
 
     tick(){
-        this.mesh.rotation.z += 0.01;
+        this.Mesh.rotation.z += 0.01;
     }
 }

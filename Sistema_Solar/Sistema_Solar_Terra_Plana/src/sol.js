@@ -16,7 +16,7 @@ export class Sol{
     tick(){
         this.Mesh.rotation.y += 0.005;
 
-        this.Mesh.position.x = Math.sin(Date.now() * 0.001) * (this.radius* 20 / 1.5);
-        this.Mesh.position.z = Math.cos(Date.now() * 0.001) * (this.radius * 20 / 1.5);
+        this.Mesh.position.x = Math.sin(Date.now() * 0.001) * (this.radius* 20 / 2);
+        this.Mesh.position.z = Math.cos(Date.now() * 0.001) * (this.radius * 20 / 2);
     }
 }

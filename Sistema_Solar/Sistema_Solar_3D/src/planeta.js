@@ -17,20 +17,20 @@ export class Planeta{
         const grupo = new THREE.Group();
         this.grupo = grupo;
 
-        if(atmosfera) grupo.add((this.atmosfera = new Atmosfera(this.radius)).mesh);
-        if(lua) grupo.add((this.lua = new Lua()).mesh);
-        if(anel) grupo.add((this.anel = new Anel(this.radius)).mesh);
+        if(atmosfera) grupo.add((this.atmosfera = new Atmosfera(this.radius)).Mesh);
+        if(lua) grupo.add((this.lua = new Lua()).Mesh);
+        if(anel) grupo.add((this.anel = new Anel(this.radius)).Mesh);
 
         this.material = earth ? this.materialTerra() : this.material = this.materialGenerico();
 
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.Mesh = new THREE.Mesh(this.geometry, this.material);
         this.grupo.position.set(this.position.x, this.position.y, this.position.z);
-        grupo.add(this.mesh);
+        grupo.add(this.Mesh);
         scene.add(grupo);
     }
 
     rotate(){
-        this.mesh.rotation.y += this.speed;
+        this.Mesh.rotation.y += this.speed;
     }
 
     translate(){

@@ -11,10 +11,10 @@ export class Atmosfera{
         });
         this.material.opacity = 0.8;
         this.material.transparent = true;
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.Mesh = new THREE.Mesh(this.geometry, this.material);
     }
 
     tick(){
-        this.mesh.rotation.y += 0.02;
+        this.Mesh.rotation.y += 0.02;
     }
 }
