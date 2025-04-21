@@ -519,7 +519,7 @@ classDiagram
  }
 
  Terra --> Domo : cria e contém
- Terra --> Atmosfera : cria
+ Terra --> Atmosfera : cria e contém
  Domo --> Sol : cria e contém
  Domo --> Lua : cria e contém
  Domo --> Estrela : cria e contém
