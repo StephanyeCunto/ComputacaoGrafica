@@ -1,9 +1,11 @@
 # Sistema Solar 3D - Primeira Atividade
 
-![Banner do Sistema Solar](https://img.shields.io/badge/Computação%20Gráfica-Sistema%20Solar%203D-blue)
-[![Three.js](https://img.shields.io/badge/Three.js-black?logo=three.js&logoColor=white)]()
-
 Uma simulação 3D interativa do Sistema Solar desenvolvida com Three.js como parte da disciplina de Computação Gráfica.A aplicação renderiza o Sol, algumas estrelas e os planetas do Sistema Solar com suas respectivas órbitas, rotações e características visuais.
+<br>
+![Banner do Sistema Solar](https://img.shields.io/badge/Computação%20Gráfica-Sistema%20Solar%203D-blue)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript&logoColor=white)]()
+[![WebGL](https://img.shields.io/badge/WebGL-2.0-red)]()
+[![Three.js](https://img.shields.io/badge/Three.js-black?logo=three.js&logoColor=white)]()
 
 ### Características
 
