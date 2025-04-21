@@ -10,7 +10,7 @@ export class Domo{
 
         this.material = new THREE.MeshStandardMaterial({color: 0x888888, 
             transparent: true, 
-            opacity: 0.3,
+            opacity: 0.5,
             roughness: 0.1,
             metalness: 0.8
         });

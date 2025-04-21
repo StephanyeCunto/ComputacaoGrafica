@@ -1,4 +1,4 @@
-# Sistema Solar 3D
+# Sistema Solar 3D - Primeira Atividade
 
 ![Banner do Sistema Solar](https://img.shields.io/badge/Computação%20Gráfica-Sistema%20Solar%203D-blue)
 [![Three.js](https://img.shields.io/badge/Three.js-black?logo=three.js&logoColor=white)]()
@@ -20,7 +20,7 @@ Uma simulação 3D interativa do Sistema Solar desenvolvida com Three.js como pa
 - [Visão Geral](#-visão-geral)
 - [Funcionalidades](#-funcionalidades)
 - [Demonstração](#-demonstração)
-- [Tecnologias](#-tecnologias)
+- [Tecnologias](#tecnologias_utilizadas) 
 - [Arquitetura](#-arquitetura)
   - [Estrutura do Projeto](#estrutura-do-projeto)
   - [Diagrama de Classes](#diagrama-de-classes)
