@@ -10,7 +10,7 @@ export class Sol{
                 map: this.texture
             });
         this.sol = new THREE.Mesh(this.geometry, this.material);
-        this.luzSolar = new THREE.PointLight(0xf9e8c3, 4, 25, 0.1);
+        this.luzSolar = new THREE.PointLight(0xf9e8c3, 4, 25, 0.3);
         this.Mesh = new THREE.Group();
         this.Mesh.add(this.sol, this.luzSolar);
         this.Mesh.position.set(radius/2, radius/1.5, radius/2);

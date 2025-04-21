@@ -45,8 +45,8 @@ function criarPlanetas() {
         { nome: 'marte', radius: 4, texture:'src/assets/textures/8k_mars.jpg', position:{ x: 110, y: 0, z: 0 }},
         { nome: 'jupiter', radius: 10, texture:'src/assets/textures/8k_jupiter.jpg', position:{ x: 130, y: 0, z: 0 }},
         { nome: 'saturno', radius: 9, texture:'src/assets/textures/8k_saturn.jpg', position:{ x: 160, y: 0, z: 0 }, anel: true},
-        { nome: 'netuno', radius: 4, texture:'src/assets/textures/2k_neptune.jpg', position:{ x: 190, y: 0, z: 0 }},
-        { nome: 'urano', radius: 4, texture:'src/assets/textures/2k_uranus.jpg', position:{ x: 210, y: 0, z: 0 }}
+        { nome: 'urano', radius: 4, texture:'src/assets/textures/2k_uranus.jpg', position:{ x: 190, y: 0, z: 0 }, anel: true},
+        { nome: 'netuno', radius: 4, texture:'src/assets/textures/2k_neptune.jpg', position:{ x: 210, y: 0, z: 0 }}
     ];
 
    for (const planeta of planetas) {
@@ -58,6 +58,7 @@ function criarPlanetas() {
 
 function animate() {
     requestAnimationFrame(animate);
+
     sol.tick();
     planetasScene.forEach(planet => {
         planet.tick();

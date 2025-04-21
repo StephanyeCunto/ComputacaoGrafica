@@ -6,7 +6,7 @@ export class Estrela {
         const grupo = new THREE.Group();
         const color = [0xffffdd, 0xffeecc, 0xffffff, 0xffeedd];
         
-        for (let i = 0; i < 5000; i++) {
+        for (let i = 0; i < 2500; i++) {
             grupo.add(this.criarEstrela(Math.random() * 0.05, this.randonPosition(), color[Math.floor(Math.random() * color.length)]));
         }
 
