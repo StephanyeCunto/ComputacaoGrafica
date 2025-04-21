@@ -281,6 +281,7 @@ O código está estruturado em classes e funções modulares:
 - `index.js`: Configura o renderer, câmera, controles e cena. Gerencia a animação.
 - `terra.js`: Classe responsável pela criação do disco terrestre plano.
 - `domo.js`: Classe para criar o domo celeste semiesférico.
+- `atmosfera.js`: Classe para simular a camada de nuvens da Terra.
 - `sol.js`: Classe dedicada à criação e movimento do Sol.
 - `lua.js`: Classe para criar e controlar o movimento da Lua.
 - `estrela.js`: Classe para implementar um campo de estrelas como background.
@@ -296,22 +297,27 @@ O código está estruturado em classes e funções modulares:
    - Cria uma semiesfera transparente sobre o disco da Terra
    - Contém Sol, Lua e campo de estrelas
    - Implementa materiais translúcidos para efeito visual
+       
+3. **`Classe Atmosfera`**:
+   - Simula a camada de nuvens da Terra
+   - Utiliza material semi-transparente
+   - Possui rotação própria mais rápida que o planeta
 
-3. **`Sol`**:
+4. **`Sol`**:
    - Esfera luminosa que orbita dentro do domo
    - Implementa material emissivo para simular luz própria
    - Inclui uma fonte de luz pontual para iluminar a Terra
 
-4. **`Lua`**:
+5. **`Lua`**:
    - Satélite que orbita em sentido contrário ao Sol
    - Implementa material reflexivo para simulação realista
 
-5. **`Estrela`**:
+6. **`Estrela`**:
    - Sistema de partículas para criar o campo de estrelas
    - Distribui pontos aleatoriamente em uma semiesfera
    - Utiliza diferentes cores para maior realismo visual
 
-6. **`Index (Arquivo principal)`**:
+7. **`Index (Arquivo principal)`**:
    - Configura o ambiente de renderização
    - Gerencia o ciclo de animação
    - Configura iluminação ambiente

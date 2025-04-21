@@ -310,40 +310,40 @@ O código está estruturado em classes e funções modulares:
 
 ### Classes Principais
 
-   1. **Classe planeta**:
+   1. **`Classe planeta`**:
       - Responsável pela criação dos planetas
       - Gerencia as propriedades físicas como raio, posição e velocidade
       - Implementa o comportamento de rotação e órbita
       - Configura materiais e texturas específicas para cada planeta
       - No caso da Terra, cria uma instância da classe Lua e gerencia as nuvens
 
-2. **Classe Lua**:
+2. **`Classe Lua`**:
    - Implementa o satélite natural da Terra
    - Gerencia a órbita em torno da Terra
    - Usa textura específica para representação realista
      
-3. **Classe Sol**:
+3. **`Classe Sol`**:
     - Implementa o corpo central do sistema solar
     - Cria uma esfera com textura solar e material básico emissivo
     - Realiza rotação sobre seu próprio eixo
     
-4. **Classe Atmosfera**:
+4. **`Classe Atmosfera`**:
    - Simula a camada de nuvens da Terra
    - Utiliza material semi-transparente
    - Possui rotação própria mais rápida que o planeta
 
-5. **Classe Anel**:
+5. **`Classe Anel`**:
    - Implementa os anéis de Saturno
    - Utiliza uma geometria de anel com textura transparente
    - Possui inclinação e rotação próprias
 
-6. **Classe Estrela**:
+6. **C`lasse Estrela`**:
     - Implementa um campo de estrelas como pano de fundo para a cena
     - Cria milhares de pontos luminosos posicionados aleatoriamente em 3D
     - Utiliza THREE.Points e BufferGeometry para renderização eficiente
     - Evita posicionar estrelas próximas ao centro da cena (onde está o sistema solar)
 
-7. **Index (Arquivo principal)**:
+7. **`Index (Arquivo principal)`**:
    - Configura o ambiente de renderização
    - Gerencia o ciclo de animação
    - Cria e organiza todos os objetos do sistema solar

@@ -397,6 +397,7 @@ Este projeto implementa uma simulação 3D da Terra Plana utilizando a bibliotec
 │   ├── index.js         # Arquivo principal com inicialização da cena
 │   ├── terra.js         # Classe para criação do disco terrestre
 │   ├── domo.js          # Classe para criação do domo celeste
+│   ├── atmosfera.js     # Classe para criação da atmosfera (nuvens) da Terra
 │   ├── sol.js           # Classe para criação e controle do sol
 │   ├── lua.js           # Classe para criação e controle da lua
 │   ├── estrela.js       # Classe para criação do campo de estrelas
@@ -571,6 +572,7 @@ O código está estruturado em classes e funções modulares:
 - `index.js`: Configura o renderer, câmera, controles e cena. Gerencia a animação.
 - `terra.js`: Classe responsável pela criação do disco terrestre plano.
 - `domo.js`: Classe para criar o domo celeste semiesférico.
+- `atmosfera.js`: Classe para simular a camada de nuvens da Terra.
 - `sol.js`: Classe dedicada à criação e movimento do Sol.
 - `lua.js`: Classe para criar e controlar o movimento da Lua.
 - `estrela.js`: Classe para implementar um campo de estrelas como background.
@@ -601,7 +603,11 @@ O código está estruturado em classes e funções modulares:
    - Distribui pontos aleatoriamente em uma semiesfera
    - Utiliza diferentes cores para maior realismo visual
 
-6. **`Index (Arquivo principal)`**:
+6. **`Atmosfera`**:
+   - Camada adicional para representar nuvens terrestres
+   - Material semi-transparente com animação própria
+
+7. **`Index (Arquivo principal)`**:
    - Configura o ambiente de renderização
    - Gerencia o ciclo de animação
    - Configura iluminação ambiente

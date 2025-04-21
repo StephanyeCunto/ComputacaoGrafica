@@ -116,6 +116,7 @@ Ambos os projetos utilizam um conjunto comum de tecnologias modernas:
 │   ├── index.js         # Inicialização e controlador
 │   ├── terra.js         # Classe para o disco terrestre
 │   ├── domo.js          # Classe para o domo celeste
+│   ├── atmosfera.js     # Classe para criação da atmosfera (nuvens) da Terra
 │   ├── sol.js           # Classe para o sol
 │   ├── lua.js           # Classe para a lua
 │   ├── estrela.js       # Classe para o campo de estrelas
@@ -127,6 +128,7 @@ Ambos os projetos utilizam um conjunto comum de tecnologias modernas:
 - `terra.js`: Implementa o disco plano terrestre como base do sistema
 - `domo.js`: Cria a semiesfera transparente que cobre a Terra
 - `sol.js`: Gerencia o corpo luminoso orbital com iluminação dinâmica
+- `atmosfera.js`: Simula a camada de nuvens terrestres
 - `lua.js`: Controla o satélite em órbita circular oposta ao sol
 - `estrela.js`: Distribui pontos luminosos na semiesfera do domo
 
