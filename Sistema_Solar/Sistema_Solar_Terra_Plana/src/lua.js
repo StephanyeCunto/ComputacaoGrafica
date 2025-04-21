@@ -9,9 +9,10 @@ export class Lua{
             map: new THREE.TextureLoader().load(this.texture),
             roughness: 0.8,
             metalness: 0.1,
-        });        
+        });       
+         
         this.Mesh = new THREE.Mesh(this.geometry, this.material);
-        this.Mesh.position.set(-radius/1.5, radius/1.5, 0);
+        this.Mesh.position.set(-radius/2, radius/1.5, -radius/2);
     }
 
     tick(){

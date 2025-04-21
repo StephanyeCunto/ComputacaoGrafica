@@ -33,8 +33,8 @@ function criarSistema(){
 }
 
 function adicionarLuz(){
-  //const luzAmbiente = new THREE.AmbientLight(0x404040, 0.5); 
-  const luzAmbiente = new THREE.AmbientLight(0xffffff, 4);
+  const luzAmbiente = new THREE.AmbientLight(0x404040, 0.5); 
+  //const luzAmbiente = new THREE.AmbientLight(0xffffff, 4);
   scene.add(luzAmbiente);
 }
 
