@@ -447,6 +447,7 @@ classDiagram
    -texture: Texture
    -material: MeshStandardMaterial
    -mesh: Mesh
+   -grupoTerraAtmosfera: Group
    -grupo: Group
    -domo: Domo
    +constructor()
@@ -494,6 +495,17 @@ classDiagram
    +randonPosition()
    +criarEstrela(radius, position, color)
  }
+
+ class Atmosfera{
+   <<Entity>>
+   -radius: Number
+   -geometry: CircleGeometry
+   -texture: String
+   -material: MeshStandardMaterial
+   -Mesh: Mesh
+   +constructor(radius)
+ }
+
  class Index {
    <<Controller>>
    -renderer: WebGLRenderer
@@ -507,6 +519,7 @@ classDiagram
  }
 
  Terra --> Domo : cria e contém
+ Terra --> Atmosfera : cria
  Domo --> Sol : cria e contém
  Domo --> Lua : cria e contém
  Domo --> Estrela : cria e contém
@@ -515,6 +528,7 @@ classDiagram
  Sol --> THREE : utiliza
  Lua --> THREE : utiliza
  Estrela --> THREE : utiliza
+ Atmosfera --> THREE : utiliza
  Index --> Terra : cria e gerencia
  Index --> THREE : utiliza
  Index --> TrackballControls : utiliza

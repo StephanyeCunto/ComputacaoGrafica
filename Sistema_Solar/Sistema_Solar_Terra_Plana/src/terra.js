@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { Domo } from './domo';
+import { Atmosfera } from './atmosfera';
 
 export class Terra{
     constructor(){
@@ -15,16 +16,21 @@ export class Terra{
             metalness: 0.1
         });
         
-        
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
-        this.mesh.position.set(0, 0, 0);
-        this.mesh.rotation.x = -Math.PI/2;
+        this.Mesh = new THREE.Mesh(this.geometry, this.material);
+
+        this.grupoTerraAtmosfera = new THREE.Group();
+        this.grupoTerraAtmosfera.add(this.Mesh,(this.Atmosfera = new Atmosfera(this.radius)).Mesh);
+
+        this.grupoTerraAtmosfera.position.set(0, 0, 0);
+        this.grupoTerraAtmosfera.rotation.x = -Math.PI/2;
         
         this.grupo = new THREE.Group();
-        this.grupo.add(this.mesh ,(this.domo = new Domo(this.radius)).grupo);
+
+        this.grupo.add(this.grupoTerraAtmosfera,(this.domo = new Domo(this.radius)).grupo);
     }
 
     tick(){
         this.domo.tick();
+       // this.Atmosfera.tick();
     }
 }
