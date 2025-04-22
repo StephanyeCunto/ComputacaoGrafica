@@ -12,6 +12,7 @@ export class Atmosfera{
             opacity: 0.8
         });
         this.Mesh = new THREE.Mesh(this.geometry, this.material);
+        this.Mesh.receiveShadow = true;
     }
 
     tick(){

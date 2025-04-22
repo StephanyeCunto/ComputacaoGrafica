@@ -337,7 +337,7 @@ O código está estruturado em classes e funções modulares:
    - Utiliza uma geometria de anel com textura transparente
    - Possui inclinação e rotação próprias
 
-6. **C`lasse Estrela`**:
+6. **`Classe Estrela`**:
     - Implementa um campo de estrelas como pano de fundo para a cena
     - Cria milhares de pontos luminosos posicionados aleatoriamente em 3D
     - Utiliza THREE.Points e BufferGeometry para renderização eficiente

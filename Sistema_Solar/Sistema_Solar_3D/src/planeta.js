@@ -24,6 +24,9 @@ export class Planeta{
         this.material = earth ? this.materialTerra() : this.material = this.materialGenerico();
 
         this.Mesh = new THREE.Mesh(this.geometry, this.material);
+        this.Mesh.castShadow = true;
+        this.Mesh.receiveShadow = true;
+
         this.grupo.position.set(this.position.x, this.position.y, this.position.z);
         grupo.add(this.Mesh);
         scene.add(grupo);

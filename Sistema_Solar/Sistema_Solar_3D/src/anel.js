@@ -15,6 +15,7 @@ export class Anel{
         });
         this.Mesh = new THREE.Mesh(this.geometry, this.material);
         this.Mesh.rotation.x = (Math.PI / 2) + 4/ radius;
+        this.Mesh.receiveShadow = true;
     }
 
     tick(){

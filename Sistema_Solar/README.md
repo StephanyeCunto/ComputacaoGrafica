@@ -88,13 +88,12 @@ Ambos os projetos utilizam um conjunto comum de tecnologias modernas:
 ├── index.html           # Página principal 
 ├── src/
 │   ├── index.js         # Inicialização e controlador
-│   ├── components/
-│   │   ├── planeta.js   # Classe para planetas
-│   │   ├── sol.js       # Classe para o sol
-│   │   ├── lua.js       # Classe para a lua
-│   │   ├── atmosfera.js # Classe para atmosfera da Terra
-│   │   ├── anel.js      # Classe para anéis de Saturno
-│   │   └── estrela.js   # Classe para campo de estrelas
+│   ├── planeta.js   # Classe para planetas
+│   ├── sol.js       # Classe para o sol
+│   ├── lua.js       # Classe para a lua
+│   ├── atmosfera.js # Classe para atmosfera da Terra
+│   ├── anel.js      # Classe para anéis de Saturno
+│   ├── estrela.js   # Classe para campo de estrelas
 │   └── assets/
 │       └── textures/    # Texturas dos elementos
 ```

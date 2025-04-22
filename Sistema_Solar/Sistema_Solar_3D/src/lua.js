@@ -11,6 +11,8 @@ export class Lua{
             metalness: 0.1,
           });        
         this.Mesh = new THREE.Mesh(this.geometry, this.material);
+        this.Mesh.castShadow = true;
+        this.Mesh.receiveShadow = true;
         this.Mesh.position.set(15, 0, 0);
     }
 

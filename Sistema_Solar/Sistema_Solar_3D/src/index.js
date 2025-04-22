@@ -7,6 +7,8 @@ import { Estrela } from './estrela.js';
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; 
 
 document.body.appendChild(renderer.domElement);
 
@@ -32,6 +34,8 @@ function criarSistemaSolar(){
 function adicionarLuz() {
     const luzAmbiente = new THREE.AmbientLight(0x404040, 0.5); 
     const luzSolar = new THREE.PointLight(0xf9e8c3, 4, 2000, 0.1);
+    luzSolar.castShadow = true;
+
     luzSolar.position.set(0, 0, 0);
     scene.add(luzAmbiente, luzSolar);
  }
