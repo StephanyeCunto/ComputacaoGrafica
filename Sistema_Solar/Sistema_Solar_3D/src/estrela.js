@@ -15,14 +15,14 @@ export class Estrela {
         scene.add(this.Mesh);
     }
 
-    randonPosition() {
-        const z = (Math.random() - 0.5) * this.largura;
-        
+    randonPosition() {    
         let x;
         let y;
+        let z;
         do {
             x = (Math.random() - 0.5) * this.largura;
             y = (Math.random() - 0.5) * this.altura;
+            z = (Math.random() - 0.5) * this.largura;
         } while (Math.abs(x) < 220 && Math.abs(y) < 220 && Math.abs(z) < 220);
 
         return { x, y, z };

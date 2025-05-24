@@ -30,6 +30,14 @@ export class Planeta{
         this.grupo.position.set(this.position.x, this.position.y, this.position.z);
         grupo.add(this.Mesh);
         scene.add(grupo);
+
+      /* const orbita = new THREE.RingGeometry(this.distanceSol, this.distanceSol-0.08, 128);
+        const material = new THREE.MeshBasicMaterial({ color: 0xb5b5b5, side: THREE.DoubleSide });
+        const ring = new THREE.Mesh(orbita, material);
+        ring.position.set(0, 0, 0);
+        ring.rotation.x = Math.PI / 2;
+        scene.add(ring);
+        */
     }
 
     rotate(){

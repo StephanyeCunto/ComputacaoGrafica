@@ -6,8 +6,8 @@ export class Terra{
     constructor(){
         this.radius = 20;
         this.geometry = new THREE.CircleGeometry(this.radius, 128,128);
-        this.texture = new THREE.TextureLoader().load('/src/assets/textures/8k_earth_daymap.jpg');
-        this.normalMap = new THREE.TextureLoader().load('/src/assets/textures/earth_normal_2048.jpg');
+        this.texture = new THREE.TextureLoader().load('/src/assets/TerraPlana/Earth_Diffuse_6K.jpg');
+        this.normalMap = new THREE.TextureLoader().load('/src/assets/TerraPlana/earth_normal.jpg');
         this.material = new THREE.MeshStandardMaterial({
             map: this.texture,
             normalMap: this.normalMap,

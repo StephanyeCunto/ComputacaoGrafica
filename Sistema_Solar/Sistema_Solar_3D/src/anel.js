@@ -4,11 +4,11 @@ export class Anel{
     constructor(radius){
         this.radius = radius;
         this.geometry = new THREE.RingGeometry(this.radius + 0.2* this.radius, this.radius + 0.6 * this.radius ,64,64);        
-        this.texture = 'src/assets/textures/anel.png';   
+        this.texture = 'src/assets/textures/saturn_ring.png';   
         this.material = new THREE.MeshPhongMaterial({
             map:new THREE.TextureLoader().load(this.texture),
             transparent: true,
-            opacity: 0.8,
+            opacity: 0.9,
             blending: THREE.AdditiveBlending,  
             side: THREE.DoubleSide,
             emissive: 0x222222   

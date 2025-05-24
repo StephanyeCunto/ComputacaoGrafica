@@ -27,7 +27,6 @@ animate();
 function criarSistema(){
   const grupoTerra = new THREE.Group();
   grupoTerra.add((terra =new Terra()).grupo);
-
   scene.add(grupoTerra);
 }
 

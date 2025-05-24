@@ -18,7 +18,6 @@ export class Estrela {
         const phi =  Math.random() * Math.PI/2; // Ângulo de descida a partir do eixo Y (0 a 90)
         
         // Cálculo da posição em coordenadas esféricas
-        // Coordenadas Polares = 2D
         // Coordenadas Esféricas = 3D
         const x =  this.radius * Math.sin(phi) * Math.cos(theta); // seno (0 a 90) * cosseno (0 a 360)
         const y = this.radius * Math.cos(phi); // cosseno (0 a 90)
