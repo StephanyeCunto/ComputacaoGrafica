@@ -8,7 +8,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
 camera.position.z = 300;
 
 const controls = new TrackballControls(camera, renderer.domElement);
@@ -20,8 +20,8 @@ const bee = new Bee(87);
 scene.add(bee.group);
 
 function initLights(){
-    const light = new THREE.AmbientLight(0xffffff, 10);
-    scene.add(light);
+  const light = new THREE.AmbientLight(0xf6e568, 10);
+  scene.add(light);
 }
 
 function animate() {
