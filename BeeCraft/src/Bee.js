@@ -12,8 +12,8 @@ export class Bee {
         loader.load('/models/bee_minecraft.glb', 
             (gltf) => {
                 this.beeModel = gltf.scene;
-                this.beeModel.position.set(180, 150, 180);
-                this.beeModel.scale.set(1, 1, 1);
+                this.beeModel.position.set(180, 200, 180);
+                this.beeModel.scale.set(3, 3, 3);
 
                 this.beeModel.traverse((child) => {
                     if (child.isMesh) {
@@ -37,13 +37,13 @@ export class Bee {
             
         const phaseOffset = Math.sin(time * 2) * 0.05;
             
-       // this.wingLeft.rotation.z = flapAngle + phaseOffset;
-       // this.wingRight.rotation.z = -flapAngle - phaseOffset;
+        this.wingLeft.rotation.z = flapAngle + phaseOffset;
+        this.wingRight.rotation.z = -flapAngle - phaseOffset;
 
-       // this.wingLeft.scale.x = -1;
+        this.wingLeft.scale.x = -1;
 
-       // this.beeModel.position.y = Math.sin(time * 2) * 0.3;
-      //  this.beeModel.rotation.x = Math.sin(time * 1.5) * 0.02;
-      //  this.beeModel.rotation.z = Math.sin(time * 1.8) * 0.01;
+        this.beeModel.position.y += Math.sin(time * 2) * 0.3;
+        this.beeModel.rotation.x += Math.sin(time * 1.5) * 0.002;
+        this.beeModel.rotation.z += Math.sin(time * 1.8) * 0.001;
     }
 }

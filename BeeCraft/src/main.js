@@ -1,136 +1,144 @@
 import * as THREE from 'three';
-import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
+import { FlyControls } from './FlyControls.js';
 import { Bee } from './Bee';
-import { World } from './World';
 import { Sky } from './Sky';
+import { World } from './World';
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
 
-const scene = new THREE.Scene();
 let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+camera.position.set(180, 200, 180);
 
-let controls = new PointerLockControls(camera, document.body);
-scene.add(controls.getObject());
+let controls = new TrackballControls(camera, renderer.domElement);
+let flyControls = null;
 
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb);
+
+let followBeeMode = true;
 let isOrthographic = false;
 
-document.body.addEventListener('click', () => {
-    if (!isOrthographic) {
-        controls.lock();
-    }
-});
-
-const clock = new THREE.Clock();
-const velocity = new THREE.Vector3();
-
 function initLights() {
-    const ambientLight = new THREE.AmbientLight(0xfbf9f3, 3);
+    const ambientLight = new THREE.AmbientLight(0xdad8d6, 3);
     scene.add(ambientLight);
 }
 
-const bee = new Bee((model) => {
-    scene.add(model);
-    controls.getObject().position.copy(model.position.clone().add(new THREE.Vector3(0, 10, 30)));
-});
-const world = new World((model) => scene.add(model));
-const sky = new Sky((model) => scene.add(model));
-
-function updatePosition() {
-    if (bee && bee.beeModel) {
-        if (isOrthographic) {
-            controls.target.copy(bee.beeModel.position);
-            camera.position.set(bee.beeModel.position.x, bee.beeModel.position.y + 10, bee.beeModel.position.z + 30);
-            camera.lookAt(bee.beeModel.position);
-        }
-    }
+function createPerspectiveCamera() {
+    return new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
 }
 
-window.addEventListener('keydown', (event) => {
-    switch (event.key.toLowerCase()) {
-        case 'o':
-            const aspect = window.innerWidth / window.innerHeight;
-            const frustumSize = 200;
-            
-            camera = new THREE.OrthographicCamera(
-                (frustumSize * aspect) / -2, // left
-                (frustumSize * aspect) / 2,  // right
-                frustumSize / 2,             // top
-                frustumSize / -2,            // bottom
-                0.1,                         // near
-                2000                         // far
-            );
-            
-            isOrthographic = true;
-            updatePosition();
-            
-        //    controls = new TrackballControls(camera, renderer.domElement);
-        //    controls.enableDamping = true;
-         //   controls.dampingFactor = 0.05;
-            break;
-            
-        case 'p':
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-            
-            isOrthographic = false;
-            
-            controls = new PointerLockControls(camera, document.body);
-            scene.add(controls.getObject());
-            
-            if (bee && bee.beeModel) {
-                controls.getObject().position.copy(bee.beeModel.position.clone().add(new THREE.Vector3(0, 10, 30)));
-            }
-            break;
-    }
-});
+function createOrthographicCamera() {
+    const frustumSize = 400;
+    const aspect = window.innerWidth / window.innerHeight;
+    return new THREE.OrthographicCamera(
+        frustumSize * aspect / -2,
+        frustumSize * aspect / 2,
+        frustumSize / 2,
+        frustumSize / -2,
+        0.1,
+        2000
+    );
+}
 
-// Animação
+function switchToOrthographic() {
+    if (isOrthographic) return;
+    
+    const currentPosition = camera.position.clone();
+    const currentRotation = camera.rotation.clone();
+    
+    if (controls && controls.dispose) controls.dispose();
+    if (flyControls) {
+        flyControls.disconnect();
+        flyControls = null;
+    }
+    
+    camera = createOrthographicCamera();
+    camera.position.copy(currentPosition);
+    camera.rotation.copy(currentRotation);
+    
+    if (followBeeMode) controls = new TrackballControls(camera, renderer.domElement);
+    else flyControls = new FlyControls(camera, renderer.domElement);
+
+    isOrthographic = true;
+}
+
+function switchToPerspective() {
+    if (!isOrthographic) return;
+    
+    const currentPosition = camera.position.clone();
+    const currentRotation = camera.rotation.clone();
+
+    if (controls && controls.dispose) controls.dispose();
+    if (flyControls) {
+        flyControls.disconnect();
+        flyControls = null;
+    }
+
+    camera = createPerspectiveCamera();
+    camera.position.copy(currentPosition);
+    camera.rotation.copy(currentRotation);
+    
+    if (followBeeMode) controls = new TrackballControls(camera, renderer.domElement);
+   else flyControls = new FlyControls(camera, renderer.domElement);
+    
+    isOrthographic = false;
+}
+
+const bee = new Bee((model) => scene.add(model));
+const sky = new Sky((model) => scene.add(model));
+const world = new World((model) => scene.add(model));
+
 function animate() {
     requestAnimationFrame(animate);
-    const delta = clock.getDelta();
-    const moveSpeed = 20;
     
-    // Movimento automático apenas no modo perspectiva
-    if (!isOrthographic) {
-        // Move constantemente para frente na direção da câmera
-        velocity.set(0, 0, -1); // Direção "frente"
-        velocity.applyQuaternion(camera.quaternion); // Aplica a rotação da câmera
-        velocity.multiplyScalar(moveSpeed * delta); // Aplica velocidade
-        controls.getObject().position.add(velocity); // Move a câmera
+    bee.animate();
+    
+    if (bee.beeModel) {
+        if (followBeeMode) controls.update();
         
-    } else {
-        // Atualiza controles TrackballControls no modo ortográfico
-        if (controls && controls.update) {
-            controls.update();
+        if (flyControls) {
+            flyControls.update();
+            const cameraOffset = new THREE.Vector3(10, -5, -50);
+            cameraOffset.applyQuaternion(camera.quaternion);
+            const targetBeePosition = camera.position.clone().add(cameraOffset);
+            bee.beeModel.position.lerp(targetBeePosition, 0.08);
+            
+            const cameraDirection = new THREE.Vector3();
+            camera.getWorldDirection(cameraDirection);
+            bee.beeModel.quaternion.slerp(camera.quaternion, 0.1);
         }
     }
     
-    if (bee) bee.animate();
     renderer.render(scene, camera);
 }
 
-// Redimensionamento da janela
-window.addEventListener('resize', () => {
-    const aspect = window.innerWidth / window.innerHeight;
+window.addEventListener('keydown', (event) => {
+    const key = event.key.toLowerCase();
     
-    if (isOrthographic) {
-        const frustumSize = 200;
-        camera.left = (frustumSize * aspect) / -2;
-        camera.right = (frustumSize * aspect) / 2;
-        camera.top = frustumSize / 2;
-        camera.bottom = frustumSize / -2;
-    } else {
-        camera.aspect = aspect;
+    if (key === 'f') {
+        followBeeMode = !followBeeMode;
+        
+        if (followBeeMode) {
+            if (flyControls) {
+                flyControls.disconnect();
+                flyControls = null;
+            }
+            controls = new TrackballControls(camera, renderer.domElement);
+        } else {
+            if (controls && controls.dispose) controls.dispose();
+            flyControls = new FlyControls(camera, renderer.domElement);
+        }
     }
     
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    if (key === 'p') switchToPerspective();
+    
+    if (key === 'o') switchToOrthographic();
 });
 
-// Inicializa
 initLights();
 animate();
