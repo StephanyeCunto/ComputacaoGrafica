@@ -13,6 +13,265 @@ Este repositório contém trabalhos desenvolvidos para a disciplina de Computaç
 - [BeeCraft](#sumário---beecraft)
 
 ---
+
+## 📋 Índice
+
+1. [🚀 Projetos](#-projetos)
+2. [🛠️ Tecnologias](#️-tecnologias)
+3. [📋 Requisitos](#-requisitos)
+4. [🏃‍♂️ Início Rápido](#️-início-rápido)
+5. [🤝 Contribuindo](#-contribuindo)
+6. [📚 Recursos](#-recursos)
+
+---
+
+
+## 🚀 Projetos
+
+### 🌌 Sistema Solar 3D
+**Simulação interativa do Sistema Solar com física realística**
+
+<div align="center">
+  <img src="/img/Sistema_Solar_3D.png" alt="Sistema Solar 3D" width="600"/>
+  <p><em>Simulação completa do Sistema Solar com órbitas e rotações realísticas</em></p>
+</div>
+
+**Principais Características:**
+- ✨ Renderização 3D de alta qualidade
+- 🪐 Órbitas planetárias com velocidades proporcionais
+- 🌍 Terra com nuvens e mapa normal detalhado
+- 🌙 Lua orbitando a Terra
+- 🪐 Anéis de Saturno com transparência
+- ⭐ Campo de estrelas de fundo
+- 🎮 Controles interativos de câmera
+
+**[📖 Documentação Completa](#sistema-solar---primeira-atividade)** 
+
+---
+
+### 🌍 Terra Plana
+**Modelo cosmológico alternativo em 3D**
+
+<div align="center">
+  <img src="/img/Terra_Plana.png" alt="Terra Plana" width="600"/>
+  <p><em>Implementação da teoria da Terra Plana com domo celeste</em></p>
+</div>
+
+**Principais Características:**
+- 🌍 Terra representada como disco plano
+- 🏛️ Domo celeste semiesférico transparente
+- ☀️ Sol e Lua orbitando dentro do domo
+- ⭐ Campo de estrelas fixo
+- 💡 Iluminação dinâmica
+- 🎮 Controles de câmera TrackballControls
+
+**[📖 Documentação Completa](#terra-plana---segunda-atividade)** 
+
+---
+
+### 🐝 BeeCraft
+**Simulador de voo de abelha inspirado no Minecraft**
+
+<div align="center">
+  <img src="/img/BeeCraft.png" alt="BeeCraft" width="600"/>
+  <p><em>Voe como uma abelha no universo Minecraft</em></p>
+</div>
+
+**Principais Características:**
+- 🎮 Dois modos de controle: Follow Bee e Fly Controls
+- 🐝 Modelo 3D animado com batimento de asas
+- 🌍 Ambiente Minecraft completo
+- 📷 Alternância entre câmera perspectiva e ortográfica
+- 🎯 Pointer Lock para controle imersivo
+- ✨ Animações procedurais e movimentos fluidos
+
+**[📖 Documentação Completa](#-beecraft---minecraft-bee-flight-simulator)** 
+
+---
+
+## 🛠️ Tecnologias
+
+### **Core Stack**
+- **[Three.js](https://threejs.org/)** `r128` - Engine de renderização 3D
+- **WebGL 2.0** - API de renderização gráfica
+- **JavaScript ES6+** - Linguagem de programação moderna
+- **HTML5 & CSS3** - Estruturação e estilização
+
+### **Ferramentas de Desenvolvimento**
+- **[Vite](https://vitejs.dev/)** - Build tool e servidor de desenvolvimento
+- **NPM** - Gerenciamento de dependências
+- **ES6 Modules** - Sistema modular
+
+### **Bibliotecas e APIs**
+- **TrackballControls** - Controles orbitais de câmera
+- **GLTFLoader** - Carregamento de modelos 3D
+- **Pointer Lock API** - Controle imersivo de mouse
+- **RequestAnimationFrame** - Loop de animação otimizado
+
+---
+
+## 📋 Requisitos
+
+### 🌐 Compatibilidade de Navegadores
+| Navegador | Versão Mínima | WebGL 2.0 | Status |
+|-----------|---------------|-----------|--------|
+| **Chrome** | 90+ | ✅ | 🟢 Recomendado |
+| **Firefox** | 88+ | ✅ | 🟢 Suportado |
+| **Safari** | 14+ | ✅ | 🟢 Suportado |
+| **Edge** | 90+ | ✅ | 🟢 Suportado |
+
+### 💻 Requisitos de Hardware
+- **GPU**: Suporte a WebGL 2.0 obrigatório
+- **RAM**: Mínimo 4GB (8GB recomendado)
+- **Processador**: CPU moderna para 60fps
+- **Conectividade**: Necessária para carregamento de assets
+
+---
+
+## 🏃‍♂️ Início Rápido
+
+### 1️⃣ **Clone o Repositório**
+```bash
+git clone https://github.com/StephanyeCunto/ComputacaoGrafica.git
+cd ComputacaoGrafica
+```
+
+### 2️⃣ **Escolha um Projeto**
+```bash
+# Sistema Solar 3D
+cd Sistema_Solar/Sistema_Solar_3D
+
+# Terra Plana
+cd Terra_Plana
+
+# BeeCraft
+cd BeeCraft
+```
+
+### 3️⃣ **Instale as Dependências**
+```bash
+npm install
+```
+
+### 4️⃣ **Execute o Projeto**
+```bash
+npm start
+```
+
+### 5️⃣ **Acesse no Navegador**
+```
+http://localhost:3000
+```
+
+---
+
+## 🎮 Controles Universais
+
+### ⌨️ **Controles de Câmera**
+- **Mouse**: Clique e arraste para rotacionar
+- **Scroll**: Zoom in/out
+- **Botão Direito**: Pan (deslocamento lateral)
+
+### 🎯 **Controles Específicos por Projeto**
+- **BeeCraft**: Tecla `F` para alternar modos, `P`/`O` para câmeras
+- **Sistema Solar**: Navegação livre com TrackballControls
+- **Terra Plana**: Orbitar ao redor do disco terrestre
+
+---
+
+## 📊 Arquitetura Geral
+
+```mermaid
+graph TD
+    A[HTML5 Canvas] --> B[Three.js Engine]
+    B --> C[WebGL Renderer]
+    C --> D[Scene Graph]
+    D --> E[3D Models]
+    D --> F[Lighting System]
+    D --> G[Camera System]
+    D --> H[Animation Loop]
+    
+    I[User Input] --> J[Controls System]
+    J --> G
+    J --> H
+    
+    K[Asset Loading] --> L[GLTF Models]
+    K --> M[Textures]
+    L --> E
+    M --> E
+```
+
+---
+
+## 🎯 Objetivos de Aprendizado
+
+### 📚 **Conceitos Fundamentais**
+- [x] Pipeline de renderização 3D
+- [x] Transformações matriciais
+- [x] Sistemas de coordenadas
+- [x] Projeções perspectiva e ortográfica
+
+### 🔧 **Técnicas Avançadas**
+- [x] Iluminação e sombreamento
+- [x] Mapeamento de texturas
+- [x] Animações procedurais
+- [x] Controles de câmera customizados
+
+### 🎨 **Aplicações Práticas**
+- [x] Simulações físicas
+- [x] Ambientes interativos
+- [x] Modelos astronômicos
+- [x] Jogos 3D simples
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Siga estas etapas:
+
+1. **Fork** o repositório
+2. **Crie** uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** para a branch (`git push origin feature/AmazingFeature`)
+5. **Abra** um Pull Request
+
+### 📝 **Diretrizes**
+- Mantenha o código limpo e comentado
+- Siga os padrões de nomenclatura existentes
+- Teste em múltiplos navegadores
+- Atualize a documentação se necessário
+
+---
+
+## 📚 Recursos
+
+### 📖 **Documentação**
+- [Three.js Official Docs](https://threejs.org/docs/)
+- [WebGL Fundamentals](https://webglfundamentals.org/)
+- [MDN WebGL Guide](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
+
+### 🎓 **Tutoriais**
+- [Three.js Journey](https://threejs-journey.com/)
+- [Real-Time 3D Graphics with WebGL 2](https://webgl2fundamentals.org/)
+- [Learn OpenGL](https://learnopengl.com/) (conceitos transferíveis)
+
+### 🔧 **Ferramentas**
+- [Blender](https://www.blender.org/) - Modelagem 3D
+- [GLTF Validator](https://github.khronos.org/glTF-Validator/) - Validação de modelos
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/) - Debug WebGL
+
+---
+
+## 📈 Estatísticas do Projeto
+
+<div align="center">
+
+![GitHub repo size](https://img.shields.io/github/repo-size/StephanyeCunto/ComputacaoGrafica?)
+![GitHub last commit](https://img.shields.io/github/last-commit/StephanyeCunto/ComputacaoGrafica?)
+
+</div>
+
+---
 ## Sumário - Sistema Solar 3D
 
 - [Descrição do Projeto](#descrição-do-projeto)
