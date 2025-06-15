@@ -1,11 +1,13 @@
 import * as THREE from 'three';
+
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 import { FlyControls } from './FlyControls.js';
+
 import { Bee } from './Bee';
 import { Sky } from './Sky';
 import { World } from './World';
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer();
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
@@ -14,14 +16,17 @@ document.body.appendChild(renderer.domElement);
 let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
 camera.position.set(180, 200, 180);
 
+const scene = new THREE.Scene();
+
 let controls = new TrackballControls(camera, renderer.domElement);
 let flyControls = null;
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x87ceeb);
-
 let followBeeMode = true;
 let isOrthographic = false;
+
+const bee = new Bee((model) => scene.add(model));
+const sky = new Sky((model) => scene.add(model));
+const world = new World((model) => scene.add(model));
 
 function initLights() {
     const ambientLight = new THREE.AmbientLight(0xdad8d6, 3);
@@ -33,7 +38,7 @@ function createPerspectiveCamera() {
 }
 
 function createOrthographicCamera() {
-    const frustumSize = 400;
+    const frustumSize = 300;
     const aspect = window.innerWidth / window.innerHeight;
     return new THREE.OrthographicCamera(
         frustumSize * aspect / -2,
@@ -89,29 +94,23 @@ function switchToPerspective() {
     isOrthographic = false;
 }
 
-const bee = new Bee((model) => scene.add(model));
-const sky = new Sky((model) => scene.add(model));
-const world = new World((model) => scene.add(model));
-
 function animate() {
     requestAnimationFrame(animate);
     
     bee.animate();
-    
-    if (bee.beeModel) {
-        if (followBeeMode) controls.update();
+
+    if (followBeeMode) controls.update();
         
-        if (flyControls) {
-            flyControls.update();
-            const cameraOffset = new THREE.Vector3(10, -5, -50);
-            cameraOffset.applyQuaternion(camera.quaternion);
-            const targetBeePosition = camera.position.clone().add(cameraOffset);
-            bee.beeModel.position.lerp(targetBeePosition, 0.08);
+    if (flyControls) {
+        flyControls.update();
+        const cameraOffset = new THREE.Vector3(10, -5, -50);
+        cameraOffset.applyQuaternion(camera.quaternion);
+        const targetBeePosition = camera.position.clone().add(cameraOffset);
+        bee.beeModel.position.lerp(targetBeePosition, 0.08);
             
-            const cameraDirection = new THREE.Vector3();
-            camera.getWorldDirection(cameraDirection);
-            bee.beeModel.quaternion.slerp(camera.quaternion, 0.1);
-        }
+        const cameraDirection = new THREE.Vector3();
+        camera.getWorldDirection(cameraDirection);
+        bee.beeModel.quaternion.slerp(camera.quaternion, 0.1);
     }
     
     renderer.render(scene, camera);

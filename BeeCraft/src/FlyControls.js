@@ -29,11 +29,9 @@ export class FlyControls {
     }
     
     disconnect() {
-        if (this.boundMouseMove) {
-            this.domElement.removeEventListener('mousemove', this.boundMouseMove);
-            this.domElement.removeEventListener('mousedown', this.boundMouseDown);
-            this.domElement.removeEventListener('mouseup', this.boundMouseUp);
-        }
+        this.domElement.removeEventListener('mousemove', this.boundMouseMove);
+        this.domElement.removeEventListener('mousedown', this.boundMouseDown);
+        this.domElement.removeEventListener('mouseup', this.boundMouseUp);
     }
     
     onMouseMove(event) {
@@ -46,9 +44,7 @@ export class FlyControls {
             
             euler.y -= movementX * this.rotationSpeed;
             euler.x -= movementY * this.rotationSpeed;
-            
-            euler.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, euler.x));
-            
+                        
             this.camera.quaternion.setFromEuler(euler);
         }
         
@@ -73,35 +69,13 @@ export class FlyControls {
     update() {
         this.direction.set(0, 0, 0);
         
-        if (Math.abs(this.mouseX) > 0.1) {
-            this.direction.x = this.mouseX * this.moveSpeed;
-        }
-        
-        if (Math.abs(this.mouseY) > 0.1) {
-            this.direction.y = this.mouseY * this.moveSpeed;
-        }
-        
+        this.direction.x = this.mouseX * this.moveSpeed; 
+        this.direction.y = this.mouseY * this.moveSpeed;
         this.direction.z = -this.moveSpeed;
         
         this.velocity.copy(this.direction);
         this.velocity.applyQuaternion(this.camera.quaternion);
         
         this.camera.position.add(this.velocity);
-    }
-    
-    setMoveSpeed(speed) {
-        this.moveSpeed = Math.max(0.1, Math.min(10, speed));
-    }
-
-    setRotationSpeed(sensitivity) {
-        this.rotationSpeed = Math.max(0.0001, Math.min(0.01, sensitivity));
-    }
-    
-    getMoveSpeed() {
-        return this.moveSpeed;
-    }
-
-    dispose() {
-        this.disconnect();
     }
 }
