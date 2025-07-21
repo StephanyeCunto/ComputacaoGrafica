@@ -29,7 +29,11 @@ function createIluminacaoBasic(){
 function createCubos(){
     const geometry = new THREE.SphereGeometry(12,64,64);
 
-    const meshPhong = new THREE.MeshPhongMaterial({color: 0x888888});
+    const meshPhong = new THREE.MeshPhongMaterial({
+        color: 0x888888,
+        specular: 0xffffff,  
+        shininess: 100  });
+
     const meshLamber = new THREE.MeshLambertMaterial({color: 0x888888});
 
     cuboPhong = new THREE.Mesh(geometry, meshPhong);
@@ -41,9 +45,9 @@ function createCubos(){
 }
 
 function createIluminacaoPontual(){
-    luzPontualVermelha = new THREE.PointLight(0xff0000, 3000, 300, 1);
-    luzPontualVerde = new THREE.PointLight(0x00ff00, 3000 , 300, 1);
-    luzPontualAzul = new THREE.PointLight(0x0000ff, 3000, 300, 1);
+    luzPontualVermelha = new THREE.PointLight(0xff0000, 3, 300, 1);
+    luzPontualVerde = new THREE.PointLight(0x00ff00, 3 , 300, 1);
+    luzPontualAzul = new THREE.PointLight(0x0000ff, 3, 300, 1);
     scene.add(luzPontualAzul, luzPontualVerde, luzPontualVermelha);
 
     // luzPontualAzul.position.set(-80, 0, 80);
@@ -54,23 +58,21 @@ function createIluminacaoPontual(){
 function animatePontualVermelho(){
     luzPontualVermelha.position.x = Math.sin(Date.now() * 0.001) * 80;
     luzPontualVermelha.position.y = Math.cos(Date.now() * 0.001) * 80;
-
-    setInterval(() => luzPontualVermelha.intensity = Math.random() > 0.5 ? 3000 : 0 , 500); 
 }
 
 function animatePontualVerde(){
     luzPontualVerde.position.x = Math.sin(Date.now() * 0.005) * 80;
     luzPontualVerde.position.y = Math.cos(Date.now() * 0.005) * 80;
-
-    setInterval(() => luzPontualVerde.intensity = Math.random() > 0.5 ? 3000 : 0 , 500); 
 }
 
 function animatePontualAzul(){
     luzPontualAzul.position.x = Math.sin(Date.now() * 0.0002) * 80;
-    luzPontualAzul.position.y = Math.cos(Date.now() * 0.0002) * 80;
-
-    setInterval(() => luzPontualAzul.intensity = Math.random() > 0.5 ? 3000 : 0 , 500); 
+    luzPontualAzul.position.y = Math.cos(Date.now() * 0.0002) * 80; 
 }
+
+setInterval(() => luzPontualVermelha.intensity = Math.random() > 0.5 ? 800 : 0 , 50); 
+setInterval(() => luzPontualVerde.intensity = Math.random() > 0.5 ? 800 : 0 , 50); 
+setInterval(() => luzPontualAzul.intensity = Math.random() > 0.5 ? 800 : 0 , 50);
 
 createCubos();
 createIluminacaoBasic();
